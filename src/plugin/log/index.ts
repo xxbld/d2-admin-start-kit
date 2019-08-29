@@ -6,7 +6,7 @@ export default {
     // 快速打印 log
     Vue.prototype.$log = {
       ...util.log,
-      push (data) {
+      push (data:any) {
         if (typeof data === 'string') {
           // 如果传递来的数据是字符串
           // 赋值给 message 字段

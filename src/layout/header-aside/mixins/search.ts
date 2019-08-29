@@ -1,11 +1,10 @@
 import { mapState, mapMutations } from 'vuex'
-
 import hotkeys from 'hotkeys-js'
 
 export default {
   components: {
-    'd2-panel-search': () => import('../components/panel-search.vue')
-  },
+    'd2-panel-search': () => import('../components/panel-search/index.vue')
+      },
   mounted () {
     // 绑定搜索功能快捷键 [ 打开 ]
     hotkeys(this.searchHotkey.open, event => {

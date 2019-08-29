@@ -28,7 +28,7 @@ export function pathInit ({
   dbName = 'database',
   path = '',
   user = true,
-  validator = () => true,
+  validator = (value:string) => true,
   defaultValue = ''
 }) {
   const uuid = util.cookies.get('uuid') || 'ghost-uuid'

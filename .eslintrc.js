@@ -5,7 +5,6 @@ module.exports = {
   },
   'extends': [
     'plugin:vue/essential',
-    '@vue/standard',
     '@vue/typescript'
   ],
   rules: {
@@ -13,6 +12,12 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    ecmaVersion: 6,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    },
+    parser: 'typescript-eslint-parser'
   }
+
 }
