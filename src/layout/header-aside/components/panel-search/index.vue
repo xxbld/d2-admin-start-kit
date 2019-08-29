@@ -60,7 +60,7 @@ export default {
     mixin
   ],
   components: {
-    'd2-panel-search-item': () => import('./components/panel-search-item/index.vue')
+    'd2-panel-search-item': () => import('./components/panel-search-item/index')
   },
   data () {
     return {

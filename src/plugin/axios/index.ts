@@ -4,14 +4,14 @@ import { Message } from 'element-ui'
 import util from '@/libs/util'
 
 // 创建一个错误
-function errorCreate (msg) {
+function errorCreate (msg:string) {
   const error = new Error(msg)
   errorLog(error)
   throw error
 }
 
 // 记录和显示错误
-function errorLog (error) {
+function errorLog (error:Error) {
   // 添加到日志
   store.dispatch('d2admin/log/push', {
     message: '数据请求异常',

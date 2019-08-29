@@ -4,6 +4,11 @@ import util from '@/libs/util'
 
 Vue.use(VueI18n)
 
+export interface i18nMessage{
+  label:string
+  value:string
+}
+
 function loadLocaleMessages () {
   const locales = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
   const messages = {}
@@ -16,6 +21,7 @@ function loadLocaleMessages () {
   })
   return messages
 }
+
 
 const messages = loadLocaleMessages()
 

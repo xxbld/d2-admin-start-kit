@@ -1,6 +1,6 @@
 import { get } from 'lodash'
 import router from '@/router'
-import setting from '@/setting.js'
+import setting from '@/setting.ts'
 
 // 判定是否需要缓存
 const isKeepAlive = data => get(data, 'meta.cache', false)

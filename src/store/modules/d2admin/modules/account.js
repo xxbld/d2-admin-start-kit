@@ -1,5 +1,5 @@
 import { Message, MessageBox } from 'element-ui'
-import util from '@/libs/util.js'
+import util from '@/libs/util.ts'
 import router from '@/router'
 import { AccountLogin } from '@api/sys.login'
 

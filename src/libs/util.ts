@@ -1,8 +1,18 @@
+import {cookiesInterface} from './util.cookies'
 import cookies from './util.cookies'
 import db from './util.db'
 import log from './util.log'
+import { logInterface } from './util.log';
 
-const util = {
+export interface util{
+  cookies:cookiesInterface
+  db:any
+  log:logInterface
+  title?:(titleText:string)=>void
+  open?:(url:string)=>void
+}
+
+const util:util = {
   cookies,
   db,
   log
@@ -12,7 +22,7 @@ const util = {
  * @description 更新标题
  * @param {String} title 标题
  */
-util.title = function (titleText) {
+util.title = function (titleText:string) {
   const processTitle = process.env.VUE_APP_TITLE || 'D2Admin'
   window.document.title = `${processTitle}${titleText ? ` | ${titleText}` : ''}`
 }
@@ -21,7 +31,7 @@ util.title = function (titleText) {
  * @description 打开新页面
  * @param {String} url 地址
  */
-util.open = function (url) {
+util.open = function (url:string) {
   var a = document.createElement('a')
   a.setAttribute('href', url)
   a.setAttribute('target', '_blank')

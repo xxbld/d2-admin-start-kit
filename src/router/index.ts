@@ -7,7 +7,7 @@ import 'nprogress/nprogress.css'
 
 import store from '@/store/index'
 
-import util from '@/libs/util.js'
+import util from '@/libs/util.ts'
 
 // 路由数据
 import routes from './routes'
@@ -18,7 +18,6 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes
 })
-
 /**
  * 路由拦截
  * 权限验证

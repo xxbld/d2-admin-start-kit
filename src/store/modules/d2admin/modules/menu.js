@@ -1,6 +1,6 @@
 import { uniqueId } from 'lodash'
 // 设置文件
-import setting from '@/setting.js'
+import setting from '@/setting.ts'
 
 /**
  * 给菜单数据补充上 path 字段

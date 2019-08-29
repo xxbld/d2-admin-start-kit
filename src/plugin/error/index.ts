@@ -2,7 +2,7 @@ import store from '@/store'
 import util from '@/libs/util'
 
 export default {
-  install (Vue, options) {
+  install (Vue:any, options:{}) {
     Vue.config.errorHandler = function (error, instance, info) {
       Vue.nextTick(() => {
         // store 追加 log
