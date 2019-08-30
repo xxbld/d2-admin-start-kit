@@ -29,7 +29,7 @@ export function pathInit ({
   path = '',
   user = true,
   validator = (value:string) => true,
-  defaultValue = ''
+  defaultValue = '' || {}
 }) {
   const uuid = util.cookies.get('uuid') || 'ghost-uuid'
   const currentPath = `${dbName}.${user ? `user.${uuid}` : 'public'}${path ? `.${path}` : ''}`
@@ -96,7 +96,7 @@ export function database ({
   path = '',
   user = false,
   validator = () => true,
-  defaultValue = ''
+  defaultValue = ''|| {}
 } = {}) {
   return new Promise(resolve => {
     resolve(db.get(pathInit({

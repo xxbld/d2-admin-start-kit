@@ -1,7 +1,15 @@
 // 设置文件
 import setting from '@/setting.ts'
 
-export default {
+import { Module } from 'vuex'
+import {ID2AdminModule} from "@/store/modules/d2admin";
+import {IUserState} from "@/store/modules/d2admin/modules/user";
+
+export interface ITransitionState{
+  active:boolean
+}
+
+const transitionModule: Module<ITransitionState, ID2AdminModule> = {
   namespaced: true,
   state: {
     // 是否开启页面过度动画
@@ -47,3 +55,5 @@ export default {
     }
   }
 }
+
+export default transitionModule

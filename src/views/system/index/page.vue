@@ -29,21 +29,20 @@
   </d2-container>
 </template>
 
-<script>
-import D2HelpBtn from './components/d2-help-btn'
+<script lang="ts">
+import { Prop, Vue, Watch,Component} from 'vue-property-decorator'
+import D2HelpBtn from './components/d2-help-btn/'
 import D2Badge from './components/d2-badge'
 import D2PageCover from './components/d2-page-cover'
-export default {
-  components: {
+@Component({
+    components: {
     D2HelpBtn,
     D2Badge,
     D2PageCover
   },
-  data () {
-    return {
-      filename: __filename
-    }
-  }
+})
+export default class page extends Vue {
+    filename:string = __filename
 }
 </script>
 
