@@ -1,15 +1,10 @@
 import router from '@/router'
 import { cloneDeep } from 'lodash'
 import { database as getDatabase, dbGet, dbSet } from '@/libs/util.db'
-import {Action, Module, VuexModule} from "vuex-module-decorators";
 
-
-export interface IDbState {
-
-}
-
-@Module({  name: 'd2admin/db',namespaced:true })
-export default class db extends VuexModule implements IDbState {
+export default {
+  namespaced: true,
+  actions: {
     /**
      * @description 将数据存储到指定位置 | 路径不存在会自动初始化
      * @description 效果类似于取值 dbName.path = value
@@ -19,15 +14,14 @@ export default class db extends VuexModule implements IDbState {
      * @param {Object} payload value {*} 需要存储的值
      * @param {Object} payload user {Boolean} 是否区分用户
      */
-    @Action
     set (context, {
-        dbName = 'database',
-        path = '',
-        value = '',
-        user = false
+      dbName = 'database',
+      path = '',
+      value = '',
+      user = false
     }) {
-        dbSet({ dbName, path, value, user })
-    }
+      dbSet({ dbName, path, value, user })
+    },
     /**
      * @description 获取数据
      * @description 效果类似于取值 dbName.path || defaultValue
@@ -37,80 +31,74 @@ export default class db extends VuexModule implements IDbState {
      * @param {Object} payload defaultValue {*} 取值失败的默认值
      * @param {Object} payload user {Boolean} 是否区分用户
      */
-    @Action
     get (context, {
-        dbName = 'database',
-        path = '',
-        defaultValue = '',
-        user = false
+      dbName = 'database',
+      path = '',
+      defaultValue = '',
+      user = false
     }) {
-        return dbGet({ dbName, path, defaultValue, user })
-    }
+      return dbGet({ dbName, path, defaultValue, user })
+    },
     /**
      * @description 获取存储数据库对象
      * @param {Object} context
      * @param {Object} payload user {Boolean} 是否区分用户
      */
-    @Action
     database (context, {
-        user = false
+      user = false
     } = {}) {
-        return getDatabase({
-            user,
-            defaultValue: {}
-        })
-    }
+      return getDatabase({
+        user,
+        defaultValue: {}
+      })
+    },
     /**
      * @description 清空存储数据库对象
      * @param {Object} context
      * @param {Object} payload user {Boolean} 是否区分用户
      */
-    @Action
     databaseClear (context, {
-        user = false
+      user = false
     } = {}) {
-        return getDatabase({
-            user,
-            validator: () => false,
-            defaultValue: {}
-        })
-    }
+      return getDatabase({
+        user,
+        validator: () => false,
+        defaultValue: {}
+      })
+    },
     /**
      * @description 获取存储数据库对象 [ 区分页面 ]
      * @param {Object} context
      * @param {Object} payload basis {String} 页面区分依据 [ name | path | fullPath ]
      * @param {Object} payload user {Boolean} 是否区分用户
      */
-    @Action
     databasePage (context, {
-        basis = 'fullPath',
-        user = false
+      basis = 'fullPath',
+      user = false
     } = {}) {
-        return getDatabase({
-            path: `$page.${router.app.$route[basis]}`,
-            user,
-            defaultValue: {}
-        })
-    }
-
+      return getDatabase({
+        path: `$page.${router.app.$route[basis]}`,
+        user,
+        defaultValue: {}
+      })
+    },
     /**
      * @description 清空存储数据库对象 [ 区分页面 ]
      * @param {Object} context
      * @param {Object} payload basis {String} 页面区分依据 [ name | path | fullPath ]
      * @param {Object} payload user {Boolean} 是否区分用户
      */
-    @Action
     databasePageClear (context, {
-        basis = 'fullPath',
-        user = false
+      basis = 'fullPath',
+      user = false
     } = {}) {
-        return getDatabase({
-            path: `$page.${router.app.$route[basis]}`,
-            user,
-            validator: () => false,
-            defaultValue: {}
-        })
-    }
+      return getDatabase({
+        path: `$page.${router.app.$route[basis]}`,
+        user,
+        validator: () => false,
+        defaultValue: {}
+      })
+    },
     /**
      * @description 快速将页面当前的数据 ( $data ) 持久化
      * @param {Object} context
@@ -118,19 +106,18 @@ export default class db extends VuexModule implements IDbState {
      * @param {Object} payload basis {String} 页面区分依据 [ name | path | fullPath ]
      * @param {Object} payload user {Boolean} 是否区分用户
      */
-    @Action
     pageSet (context, {
-        instance,
-        basis = 'fullPath',
-        user = false
+      instance,
+      basis = 'fullPath',
+      user = false
     }) {
-        return getDatabase({
-            path: `$page.${router.app.$route[basis]}.$data`,
-            user,
-            validator: () => false,
-            defaultValue: cloneDeep(instance.$data)
-        })
-    }
+      return getDatabase({
+        path: `$page.${router.app.$route[basis]}.$data`,
+        user,
+        validator: () => false,
+        defaultValue: cloneDeep(instance.$data)
+      })
+    },
     /**
      * @description 快速获取页面快速持久化的数据
      * @param {Object} context
@@ -138,34 +125,33 @@ export default class db extends VuexModule implements IDbState {
      * @param {Object} payload basis {String} 页面区分依据 [ name | path | fullPath ]
      * @param {Object} payload user {Boolean} 是否区分用户
      */
-    @Action
     pageGet (context, {
-        instance,
-        basis = 'fullPath',
-        user = false
+      instance,
+      basis = 'fullPath',
+      user = false
     }) {
-        return dbGet({
-            path: `$page.${router.app.$route[basis]}.$data`,
-            user,
-            defaultValue: cloneDeep(instance.$data)
-        })
-    }
+      return dbGet({
+        path: `$page.${router.app.$route[basis]}.$data`,
+        user,
+        defaultValue: cloneDeep(instance.$data)
+      })
+    },
     /**
      * @description 清空页面快照
      * @param {Object} context
      * @param {Object} payload basis {String} 页面区分依据 [ name | path | fullPath ]
      * @param {Object} payload user {Boolean} 是否区分用户
      */
-    @Action
     pageClear (context, {
-        basis = 'fullPath',
-        user = false
+      basis = 'fullPath',
+      user = false
     }) {
-        return getDatabase({
-            path: `$page.${router.app.$route[basis]}.$data`,
-            user,
-            validator: () => false,
-            defaultValue: {}
-        })
+      return getDatabase({
+        path: `$page.${router.app.$route[basis]}.$data`,
+        user,
+        validator: () => false,
+        defaultValue: {}
+      })
     }
+  }
 }

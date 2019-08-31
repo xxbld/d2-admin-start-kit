@@ -1,4 +1,4 @@
-import util from '@/libs/util.ts'
+import util from '@/libs/util'
 
 export default {
   namespaced: true,

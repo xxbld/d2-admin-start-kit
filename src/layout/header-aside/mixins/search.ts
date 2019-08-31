@@ -1,5 +1,6 @@
 import { mapState, mapMutations } from 'vuex'
 import hotkeys from 'hotkeys-js'
+import { IRootState } from '../../../store/index';
 
 export default {
   components: {
@@ -23,8 +24,8 @@ export default {
   },
   computed: {
     ...mapState('d2admin', {
-      searchActive: state => state.search.active,
-      searchHotkey: state => state.search.hotkey
+      searchActive: (state:IRootState) => state.search.active,
+      searchHotkey: (state:IRootState) => state.search.hotkey
     })
   },
   methods: {

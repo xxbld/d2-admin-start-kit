@@ -1,5 +1,5 @@
 export interface logInterface {
-  capsule?:(title:string,info:string,type:string)=>void
+  capsule?:(title:string,info:string,type?:string)=>void
   colorful?:(textArr:{text:string,type?:string}[])=>void
   default?:(text:string)=>void
   primary?:(text:string)=>void
