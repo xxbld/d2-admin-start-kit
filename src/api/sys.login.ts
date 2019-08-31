@@ -10,10 +10,10 @@ export interface IAccountLogin {
   name?: string
 }
 
-export function AccountLogin(data): Promise<IAccountLogin> {
-  return request({
+export function AccountLogin(data){
+  return <Promise<IAccountLogin>>request({
     url: '/login',
     method: 'post',
     data
-  }) as Promise<IAccountLogin>
+  })
 }

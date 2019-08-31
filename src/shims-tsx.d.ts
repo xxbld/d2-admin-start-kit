@@ -1,5 +1,5 @@
 import Vue, { VNode } from 'vue'
-import {i18nMessage} from './i18n'
+import { i18nMessage } from './i18n'
 declare global {
   namespace JSX {
     // tslint:disable no-empty-interface
@@ -16,8 +16,6 @@ declare global {
 //    在 types/vue.types 里 Vue 有构造函数类型
 declare module 'vue/types/vue' {
   // 3. 声明为 Vue 补充的东西
-
-
   interface Vue {
     /**
      * open Url in new tab
@@ -25,7 +23,7 @@ declare module 'vue/types/vue' {
      */
     $open(url: string): void
     $log: log
-    $languages:i18nMessage[]
+    $languages: i18nMessage[]
   }
 }
 interface log {
