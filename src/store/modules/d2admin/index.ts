@@ -3,12 +3,16 @@
  * in a one-shot manner. There should not be any reason to edit this file.
  */
 import { VuexModule } from 'vuex-module-decorators'
-import { ModuleTree } from 'vuex'
+import { ModuleTree, StoreOptions, Module } from 'vuex'
+import releases from './temp/releases';
+import { IRootState } from '@/store';
+
+
 
 
 const files = require.context('./modules', false, /\.ts$/)
 
-const modules: ModuleTree<any> = {}
+const modules: ModuleTree<IRootState> = {}
 
 files.keys().forEach(key => {
   modules[key.replace(/(\.\/|\.ts)/g, '')] = files(key).default
@@ -17,7 +21,7 @@ files.keys().forEach(key => {
 export default {
   namespaced: true,
   modules
-}
+}  as Module<any,IRootState>
 
 export interface ID2AdminModule {
   user: any
@@ -34,4 +38,5 @@ export interface ID2AdminModule {
   fullscreen: any
   db: any
   account: any
+  releases1:releases
 }

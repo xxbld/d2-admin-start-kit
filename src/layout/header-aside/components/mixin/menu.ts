@@ -10,7 +10,7 @@ export default {
       } else {
         this.$router.push({
           path: index
-        })
+        }).catch(err => {})
       }
     }
   }

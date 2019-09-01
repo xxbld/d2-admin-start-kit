@@ -1,9 +1,27 @@
 import { get } from 'lodash'
 import router from '@/router'
 import setting from '@/setting.ts'
-
+import { Module } from 'vuex';
 // 判定是否需要缓存
 const isKeepAlive = data => get(data, 'meta.cache', false)
+
+
+
+export interface IOpened {
+  name: string
+  fullPath: string
+  meta: {
+    title: string
+    auth: boolean
+  }
+}
+export interface IPageState{
+  pool:any
+  opened:IOpened[]
+  openedLoaded:false
+  current:string
+  keepAlive:any
+}
 
 export default {
   namespaced: true,
@@ -25,7 +43,7 @@ export default {
      * @param {Object} context
      */
     isLoaded ({ state }) {
-      if (state.value) return Promise.resolve()
+      if (state.openedLoaded) return Promise.resolve()
       return new Promise(resolve => {
         const timer = setInterval(() => {
           if (state.openedLoaded) {
@@ -294,7 +312,7 @@ export default {
      * @param {Object} context
      * @param {Object} payload { pageSelect: 当前选中的tagName }
      */
-    closeOther ({ state, commit, dispatch }, { pageSelect } = {}) {
+    closeOther ({ state, commit, dispatch }, { pageSelect }:any = {}) {
       return new Promise(async resolve => {
         const pageAim = pageSelect || state.current
         let currentIndex = 0
