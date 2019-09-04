@@ -11,6 +11,9 @@ import util from '@/libs/util.ts'
 
 // 路由数据
 import routes from './routes'
+import {d2PageModule} from "@/store/modules/d2admin/modules/page";
+import {d2SizeModule} from "@/store/modules/d2admin/modules/size";
+import {d2SearchModule} from "@/store/modules/d2admin/modules/search";
 
 Vue.use(VueRouter)
 
@@ -24,13 +27,13 @@ const router = new VueRouter({
  */
 router.beforeEach(async (to, from, next) => {
   // 确认已经加载多标签页数据 https://github.com/d2-projects/d2-admin/issues/201
-  await store.dispatch('d2admin/page/isLoaded')
+  await d2PageModule.isLoaded()
   // 确认已经加载组件尺寸设置 https://github.com/d2-projects/d2-admin/issues/198
-  await store.dispatch('d2admin/size/isLoaded')
+  await d2SizeModule.isLoaded()
   // 进度条
   NProgress.start()
   // 关闭搜索面板
-  store.commit('d2admin/search/set', false)
+  d2SearchModule.set(false)
   // 验证当前路由所有的匹配中是否需要有登录验证的
   if (to.matched.some(r => r.meta.auth)) {
     // 这里暂时将cookie里是否存有token作为验证是否登录的条件
@@ -60,7 +63,7 @@ router.afterEach(to => {
   // 进度条
   NProgress.done()
   // 多页控制 打开新的页面
-  store.dispatch('d2admin/page/open', to)
+  store.dispatch('d2Page/open', to)
   // 更改标题
   util.title(to.meta.title)
 })

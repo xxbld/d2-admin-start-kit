@@ -1,18 +1,16 @@
 import UaParser from 'ua-parser-js'
+import { getModule, Mutation, VuexModule } from 'vuex-module-decorators'
 
-export default {
-  namespaced: true,
-  state: {
-    // 用户 UA
-    data: {}
-  },
-  mutations: {
-    /**
-     * @description 记录 UA
-     * @param {Object} state state
-     */
-    get (state) {
-      state.data = new UaParser().getResult()
-    }
+export interface ID2UaState {
+  data: any
+}
+
+export default class d2Ua extends VuexModule implements ID2UaState {
+  data: any
+  @Mutation
+  GET_UA() {
+    this.data = new UaParser().getResult()
   }
 }
+
+export const d2UaModule = getModule(d2Ua)

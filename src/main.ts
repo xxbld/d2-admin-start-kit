@@ -23,21 +23,22 @@ new Vue({
   render: h => h(App),
   created() {
     // 处理路由 得到每一级的路由设置
-    this.$store.commit('d2admin/page/init', frameInRoutes)
+
+    this.$store.commit('d2Page/init', frameInRoutes)
     // 设置顶栏菜单
-    this.$store.commit('d2admin/menu/headerSet', menuHeader)
+    this.$store.commit('d2Menu/headerSet', menuHeader)
     // 设置侧边栏菜单
-    this.$store.commit('d2admin/menu/asideSet', menuAside)
+    this.$store.commit('d2Menu/asideSet', menuAside)
     // 初始化菜单搜索功能
-    this.$store.commit('d2admin/search/init', menuHeader)
+    this.$store.commit('d2Search/init', menuHeader)
   },
   mounted() {
     // 展示系统信息
-    this.$store.commit('d2admin/releases/versionShow')
+    this.$store.commit('d2Releases/versionShow')
     // 用户登录后从数据库加载一系列的设置
-    this.$store.dispatch('d2admin/account/load')
+    this.$store.dispatch('d2Account/load')
     // 获取并记录用户 UA
-    this.$store.commit('d2admin/ua/get')
+    this.$store.commit('d2Ua/get')
     // 初始化全屏监听
     this.$store.dispatch('d2admin/fullscreen/listen')
   }

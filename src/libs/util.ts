@@ -1,13 +1,13 @@
-import {cookiesInterface} from './util.cookies'
+import {ICookies} from './util.cookies'
 import cookies from './util.cookies'
 import db from './util.db'
 import log from './util.log'
-import { logInterface } from './util.log';
+import { ILog } from './util.log';
 
 export interface util{
-  cookies:cookiesInterface
+  cookies:ICookies
   db:any
-  log:logInterface
+  log:ILog
   title?:(titleText:string)=>void
   open?:(url:string)=>void
 }

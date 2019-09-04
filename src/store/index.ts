@@ -1,23 +1,21 @@
 import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
 
-import d2admin, { ID2AdminModule } from './modules/d2admin'
+import { ID2AdminModule } from './modules/d2admin'
 import { release } from 'os';
-import releases1 from './modules/d2admin/temp/releases';
-import {IReleaseState} from './modules/d2admin/temp/releases';
-import custom from './modules2'
+import {ID2UserState} from "@/store/modules/d2admin/modules/user";
+
 
 Vue.use(Vuex)
 
 export interface IRootState {
-  d2Admin: ID2AdminModule
-  release: IReleaseState
+  d2User:ID2UserState
 }
 
 
-export default new Vuex.Store<any>({
+export default new Vuex.Store<IRootState>({
   modules: {
-    d2admin,
-    custom
+    // d2admin,
+    // custom
   }
 })

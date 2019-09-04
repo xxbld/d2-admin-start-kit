@@ -1,46 +1,51 @@
-export default {
-  namespaced: true,
-  state: {
-    // 用户信息
-    info: {}
-  },
-  actions: {
-    /**
-     * @description 设置用户数据
-     * @param {Object} context
-     * @param {*} info info
-     */
-    set ({ state, dispatch }, info) {
-      return new Promise(async resolve => {
-        // store 赋值
-        state.info = info
-        // 持久化
-        await dispatch('d2admin/db/set', {
-          dbName: 'sys',
-          path: 'user.info',
-          value: info,
-          user: true
-        }, { root: true })
-        // end
-        resolve()
+import { Action, getModule, VuexModule } from 'vuex-module-decorators'
+import { d2DbModule } from '@/store/modules/d2admin/modules/db'
+
+export interface ID2UserState {
+  info: any
+}
+
+export default class d2User extends VuexModule implements ID2UserState {
+  info: any = {}
+
+  /**
+   * @description 设置用户数据
+   * @param {*} info info
+   */
+  @Action
+  set(info) {
+    return new Promise(async resolve => {
+      // store 赋值
+      this.info = info
+      // 持久化
+      await d2DbModule.set({
+        dbName: 'sys',
+        path: 'user.info',
+        value: info,
+        user: true
       })
-    },
-    /**
-     * @description 从数据库取用户数据
-     * @param {Object} context
-     */
-    load ({ state, dispatch }) {
-      return new Promise(async resolve => {
-        // store 赋值
-        state.info = await dispatch('d2admin/db/get', {
-          dbName: 'sys',
-          path: 'user.info',
-          defaultValue: {},
-          user: true
-        }, { root: true })
-        // end
-        resolve()
+      // end
+      resolve()
+    })
+  }
+  /**
+   * @description 从数据库取用户数据
+   * @param {Object} context
+   */
+  @Action
+  load() {
+    return new Promise(async resolve => {
+      // store 赋值
+      this.info = await d2DbModule.get({
+        dbName: 'sys',
+        path: 'user.info',
+        defaultValue: {},
+        user: true
       })
-    }
+      // end
+      resolve()
+    })
   }
 }
+
+export const d2UserModule = getModule(d2User)

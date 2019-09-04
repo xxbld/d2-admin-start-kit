@@ -4,7 +4,6 @@
  */
 import { VuexModule } from 'vuex-module-decorators'
 import { ModuleTree, StoreOptions, Module } from 'vuex'
-import releases from './temp/releases';
 import { IRootState } from '@/store';
 
 
@@ -18,10 +17,10 @@ files.keys().forEach(key => {
   modules[key.replace(/(\.\/|\.ts)/g, '')] = files(key).default
 })
 
-export default {
-  namespaced: true,
-  modules
-}  as Module<any,IRootState>
+// export default {
+//   namespaced: true,
+//   modules
+// }  as Module<any,IRootState>
 
 export interface ID2AdminModule {
   user: any
@@ -38,5 +37,4 @@ export interface ID2AdminModule {
   fullscreen: any
   db: any
   account: any
-  releases1:releases
 }

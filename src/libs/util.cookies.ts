@@ -1,13 +1,13 @@
 import Cookies from 'js-cookie'
 
-export interface cookiesInterface {
+export interface ICookies {
   set?: (name: string, value: string, cookieSetting?: object) => void
   get?: (name: string) => string
   getAll?: () => { [key: string]: string }
   remove?: (name: string) => void
 }
 
-const cookies: cookiesInterface = {}
+const cookies: ICookies = {}
 
 /**
  * @description 存储 cookie 值
