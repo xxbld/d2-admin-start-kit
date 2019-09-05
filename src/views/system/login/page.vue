@@ -190,7 +190,7 @@ export default {
     clearInterval(this.timeInterval)
   },
   methods: {
-    ...mapActions('d2admin/account', [
+    ...mapActions('d2Account', [
       'login'
     ]),
     refreshTime () {

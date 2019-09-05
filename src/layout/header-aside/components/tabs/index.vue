@@ -83,13 +83,13 @@ export default {
     }
   },
   computed: {
-    ...mapState('d2admin/page', [
+    ...mapState('d2Page', [
       'opened',
       'current'
     ])
   },
   methods: {
-    ...mapActions('d2admin/page', [
+    ...mapActions('d2Page', [
       'close',
       'closeLeft',
       'closeRight',

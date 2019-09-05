@@ -6,7 +6,7 @@ export interface IReleaseState {
   version: string
 }
 
-@Module({ dynamic: true, store, name: 'releases', namespaced: true })
+@Module({ dynamic: true, store, name: 'd2Releases', namespaced: true })
 export default class d2Releases extends VuexModule implements IReleaseState {
   version = 'abc'
 

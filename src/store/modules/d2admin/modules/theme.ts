@@ -27,7 +27,8 @@ export default class d2Theme extends VuexModule implements ID2ThemeState {
   set(themeName) {
     return new Promise(async resolve => {
       // 检查这个主题在主题列表里是否存在
-      this.activeName = this.list.find(e => e.name === themeName) ? themeName : this.list[0].name
+      let activeName = this.list.find(e => e.name === themeName) ? themeName : this.list[0].name
+      this.SET_ACTIVE_NAME(activeName)
       // 将 vuex 中的主题应用到 dom
       this.SET_DOM()
       // 持久化
@@ -56,9 +57,9 @@ export default class d2Theme extends VuexModule implements ID2ThemeState {
       })) as string
       // 检查这个主题在主题列表里是否存在
       if (this.list.find(e => e.name === activeName)) {
-        this.activeName = activeName
+        this.SET_ACTIVE_NAME(activeName)
       } else {
-        this.activeName = this.list[0].name
+        this.SET_ACTIVE_NAME(this.list[0].name)
         // 持久化
         d2DbModule.set({
           dbName: 'sys',
@@ -80,6 +81,10 @@ export default class d2Theme extends VuexModule implements ID2ThemeState {
    */
   SET_DOM() {
     document.body.className = `theme-${this.activeName}`
+  }
+  @Mutation
+  SET_ACTIVE_NAME(activeName: string) {
+    this.activeName = activeName
   }
 }
 

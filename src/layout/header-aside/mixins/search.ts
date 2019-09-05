@@ -1,13 +1,13 @@
 import { mapState, mapMutations } from 'vuex'
 import hotkeys from 'hotkeys-js'
-import { IRootState } from '@/store/index';
-import {d2SearchModule} from "@/store/modules/d2admin/modules/search";
+import { IRootState } from '@/store/index'
+import { d2SearchModule } from '@/store/modules/d2admin/modules/search'
 
 export default {
   components: {
     'd2-panel-search': () => import('../components/panel-search/index.vue')
-      },
-  mounted () {
+  },
+  mounted() {
     // 绑定搜索功能快捷键 [ 打开 ]
     hotkeys(this.searchHotkey.open, event => {
       event.preventDefault()
@@ -19,25 +19,21 @@ export default {
       this.searchPanelClose()
     })
   },
-  beforeDestroy () {
+  beforeDestroy() {
     hotkeys.unbind(this.searchHotkey.open)
     hotkeys.unbind(this.searchHotkey.close)
   },
   computed: {
-    searchActive :d2SearchModule.active,
-    searchHotkey :d2SearchModule.hotkey
+    searchActive: () => d2SearchModule.active,
+    searchHotkey: () => d2SearchModule.hotkey
   },
   methods: {
-    // ...mapMutations({
-    //   searchToggle: 'd2admin/search/toggle',
-    //   searchSet: 'd2admin/search/set'
-    // }),
-    searchToggle:d2SearchModule.toggle,
-    searchSet:d2SearchModule.set,
+    searchToggle: d2SearchModule.toggle,
+    searchSet: d2SearchModule.set,
     /**
      * 接收点击搜索按钮
      */
-    handleSearchClick () {
+    handleSearchClick() {
       this.searchToggle()
       if (this.searchActive) {
         setTimeout(() => {
@@ -47,7 +43,7 @@ export default {
         }, 500)
       }
     },
-    searchPanelOpen () {
+    searchPanelOpen() {
       if (!this.searchActive) {
         this.searchSet(true)
         setTimeout(() => {
@@ -58,7 +54,7 @@ export default {
       }
     },
     // 关闭搜索面板
-    searchPanelClose () {
+    searchPanelClose() {
       if (this.searchActive) {
         this.searchSet(false)
       }

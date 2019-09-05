@@ -4,6 +4,7 @@ import setting from '@/setting'
 import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import store from '@/store'
 import { d2DbModule } from '@/store/modules/d2admin/modules/db'
+import { type } from 'os'
 
 /**
  * 给菜单数据补充上 path 字段
@@ -34,22 +35,22 @@ export default class d2Menu extends VuexModule implements ID2MenuState {
   // 侧栏菜单
   aside = []
   // 侧边栏收缩
-  asideCollapse = setting.menu.asideCollapse
+  asideCollapse: boolean = false
 
   /**
    * 设置侧边栏展开或者收缩
    * @param {Boolean} collapse is collapse
    */
   @Action
-  asideCollapseSet(collapse) {
+  asideCollapseSet(collapse: boolean) {
     return new Promise(async resolve => {
       // store 赋值
-      this.asideCollapse = collapse
+      this.SET_ASIDE_COLLAPSE(collapse)
       // 持久化
       d2DbModule.set({
         dbName: 'sys',
         path: 'menu.asideCollapse',
-        value: this.asideCollapse.toString(),
+        value: this.asideCollapse,
         user: true
       })
       // end
@@ -58,18 +59,18 @@ export default class d2Menu extends VuexModule implements ID2MenuState {
   }
   /**
    * 切换侧边栏展开和收缩
-   * @param {Object} context
    */
   @Action
   asideCollapseToggle() {
     return new Promise(async resolve => {
       // store 赋值
-      this.asideCollapse = !this.asideCollapse
+      this.SET_ASIDE_COLLAPSE(!this.asideCollapse)
+
       // 持久化
       d2DbModule.set({
         dbName: 'sys',
         path: 'menu.asideCollapse',
-        value: this.asideCollapse.toString(),
+        value: this.asideCollapse,
         user: true
       })
       // end
@@ -78,18 +79,19 @@ export default class d2Menu extends VuexModule implements ID2MenuState {
   }
   /**
    * 从持久化数据读取侧边栏展开或者收缩
-   * @param {Object} context
    */
   @Action
   asideCollapseLoad() {
     return new Promise(async resolve => {
       // store 赋值
-      this.asideCollapse = (await d2DbModule.get({
+      let asideCollapse = await d2DbModule.get({
         dbName: 'sys',
         path: 'menu.asideCollapse',
-        defaultValue: setting.menu.asideCollapse.toString(),
+        defaultValue: setting.menu.asideCollapse,
         user: true
-      })) as boolean
+      })
+      let doubleCheck = asideCollapse === 'true'
+      this.SET_ASIDE_COLLAPSE(doubleCheck)
       // end
       resolve()
     })
@@ -112,6 +114,12 @@ export default class d2Menu extends VuexModule implements ID2MenuState {
   asideSet(menu) {
     // store 赋值
     this.aside = supplementMenuPath(menu)
+  }
+  @Mutation
+  SET_ASIDE_COLLAPSE(value: boolean) {
+    console.log(value)
+    this.asideCollapse = value
+    console.log(this.asideCollapse)
   }
 }
 

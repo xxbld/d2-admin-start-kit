@@ -12,16 +12,15 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { d2UserModule } from '@/store/modules/d2admin/modules/user'
+import { d2AccountModule } from '@/store/modules/d2admin/modules/account'
 export default {
   computed: {
-    ...mapState('d2admin/user', [
-      'info'
-    ])
+    info:()=>d2UserModule.info
   },
   methods: {
-    ...mapActions('d2admin/account', [
-      'logout'
-    ]),
+
+    logout:()=>d2AccountModule.logout(),
     /**
      * @description 登出
      */

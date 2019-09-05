@@ -2,6 +2,7 @@ import store from '@/store'
 import axios from 'axios'
 import { Message } from 'element-ui'
 import util from '@/libs/util'
+import {d2LogModule} from "@/store/modules/d2admin/modules/log";
 
 // 创建一个错误
 function errorCreate (msg:string) {
@@ -13,13 +14,14 @@ function errorCreate (msg:string) {
 // 记录和显示错误
 function errorLog (error:Error) {
   // 添加到日志
-  store.dispatch('d2admin/log/push', {
+  d2LogModule.push({
     message: '数据请求异常',
     type: 'danger',
     meta: {
       error
     }
   })
+
   // 打印到控制台
   if (process.env.NODE_ENV === 'development') {
     util.log.danger('>>>>>> Error >>>>>>')

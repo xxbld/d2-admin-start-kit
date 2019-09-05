@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import router from '@/router'
-import {Action, getModule, Module, VuexModule} from 'vuex-module-decorators'
+import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { ID2MenuState } from '@/store/modules/d2admin/modules/menu'
 import store from '@/store'
 import { d2PageModule } from '@/store/modules/d2admin/modules/page'
@@ -48,7 +48,7 @@ export default class d2Size extends VuexModule implements ID2SizeState {
   set(size) {
     return new Promise(async resolve => {
       // store 赋值
-      this.value = size
+      this.SET_VALUE(size)
       // 应用
       this.apply()
       // 持久化
@@ -69,18 +69,22 @@ export default class d2Size extends VuexModule implements ID2SizeState {
   load() {
     return new Promise(async resolve => {
       // store 赋值
-      this.value = (await d2DbModule.get({
+      let value = (await d2DbModule.get({
         dbName: 'sys',
         path: 'size.value',
         defaultValue: 'default',
         user: true
       })) as string
-
+      this.SET_VALUE(value)
       // 应用
       this.apply()
       // end
       resolve()
     })
   }
+  @Mutation
+  SET_VALUE(value) {
+    this.value = value
+  }
 }
-export const d2SizeModule =getModule(d2Size)
+export const d2SizeModule = getModule(d2Size)

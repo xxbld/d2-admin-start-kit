@@ -2,55 +2,74 @@ import { throttle } from 'lodash'
 import { mapState } from 'vuex'
 import menuMixin from '../mixin/menu'
 import { elMenuItem, elSubmenu } from '../libs/util.menu'
+import { d2MenuModule } from '@/store/modules/d2admin/modules/menu'
 
 export default {
   name: 'd2-layout-header-aside-menu-header',
-  mixins: [
-    menuMixin
-  ],
-  render (createElement) {
-    return createElement('div', {
-      attrs: { flex: 'cross:center' },
-      class: { 'd2-theme-header-menu': true, 'is-scrollable': this.isScroll },
-      ref: 'page'
-    }, [
-      createElement('div', {
-        attrs: { class: 'd2-theme-header-menu__content', flex: '', 'flex-box': '1' },
-        ref: 'content'
-      }, [
-        createElement('div', {
-          attrs: { class: 'd2-theme-header-menu__scroll', 'flex-box': '0' },
-          style: { transform: `translateX(${this.currentTranslateX}px)` },
-          ref: 'scroll'
-        }, [
-          createElement('el-menu', {
-            props: { mode: 'horizontal', defaultActive: this.active },
-            on: { select: this.handleMenuSelect }
-          }, this.header.map(menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(this, createElement, menu)))
-        ])
-      ]),
-      ...this.isScroll ? [
-        createElement('div', {
-          attrs: { class: 'd2-theme-header-menu__prev', flex: 'main:center cross:center', 'flex-box': '0' },
-          on: { click: () => this.scroll('left') }
-        }, [
-          createElement('i', { attrs: { class: 'el-icon-arrow-left' } })
-        ]),
-        createElement('div', {
-          attrs: { class: 'd2-theme-header-menu__next', flex: 'main:center cross:center', 'flex-box': '0' },
-          on: { click: () => this.scroll('right') }
-        }, [
-          createElement('i', { attrs: { class: 'el-icon-arrow-right' } })
-        ])
-      ] : []
-    ])
+  mixins: [menuMixin],
+  render(createElement) {
+    return createElement(
+      'div',
+      {
+        attrs: { flex: 'cross:center' },
+        class: { 'd2-theme-header-menu': true, 'is-scrollable': this.isScroll },
+        ref: 'page'
+      },
+      [
+        createElement(
+          'div',
+          {
+            attrs: { class: 'd2-theme-header-menu__content', flex: '', 'flex-box': '1' },
+            ref: 'content'
+          },
+          [
+            createElement(
+              'div',
+              {
+                attrs: { class: 'd2-theme-header-menu__scroll', 'flex-box': '0' },
+                style: { transform: `translateX(${this.currentTranslateX}px)` },
+                ref: 'scroll'
+              },
+              [
+                createElement(
+                  'el-menu',
+                  {
+                    props: { mode: 'horizontal', defaultActive: this.active },
+                    on: { select: this.handleMenuSelect }
+                  },
+                  this.header.map(menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(this, createElement, menu))
+                )
+              ]
+            )
+          ]
+        ),
+        ...(this.isScroll
+          ? [
+              createElement(
+                'div',
+                {
+                  attrs: { class: 'd2-theme-header-menu__prev', flex: 'main:center cross:center', 'flex-box': '0' },
+                  on: { click: () => this.scroll('left') }
+                },
+                [createElement('i', { attrs: { class: 'el-icon-arrow-left' } })]
+              ),
+              createElement(
+                'div',
+                {
+                  attrs: { class: 'd2-theme-header-menu__next', flex: 'main:center cross:center', 'flex-box': '0' },
+                  on: { click: () => this.scroll('right') }
+                },
+                [createElement('i', { attrs: { class: 'el-icon-arrow-right' } })]
+              )
+            ]
+          : [])
+      ]
+    )
   },
   computed: {
-    ...mapState('d2admin/menu', [
-      'header'
-    ])
+    header: () => d2MenuModule.header
   },
-  data () {
+  data() {
     return {
       active: '',
       isScroll: false,
@@ -62,14 +81,14 @@ export default {
   },
   watch: {
     '$route.matched': {
-      handler (val) {
+      handler(val) {
         this.active = val[val.length - 1].path
       },
       immediate: true
     }
   },
   methods: {
-    scroll (direction) {
+    scroll(direction) {
       if (direction === 'left') {
         // 向右滚动
         this.currentTranslateX = 0
@@ -82,7 +101,7 @@ export default {
         }
       }
     },
-    checkScroll () {
+    checkScroll() {
       let contentWidth = this.$refs.content.clientWidth
       let scrollWidth = this.$refs.scroll.clientWidth
       if (this.isScroll) {
@@ -117,7 +136,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     // 初始化判断
     // 默认判断父元素和子元素的大小，以确定初始情况是否显示滚动
     window.addEventListener('load', this.checkScroll)
@@ -125,7 +144,7 @@ export default {
     this.throttledCheckScroll = throttle(this.checkScroll, 300)
     window.addEventListener('resize', this.throttledCheckScroll)
   },
-  beforeDestroy () {
+  beforeDestroy() {
     // 取消监听
     window.removeEventListener('resize', this.throttledCheckScroll)
     window.removeEventListener('load', this.checkScroll)

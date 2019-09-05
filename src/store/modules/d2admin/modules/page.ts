@@ -33,7 +33,7 @@ export default class d2Page extends VuexModule implements ID2PageState {
   keepAlive: any = []
   opened: IOpened[] = setting.page.opened
   openedLoaded = false
-  pool: any
+  pool: any = []
 
   /**
    * @description 确认已经加载多标签页数据 https://github.com/d2-projects/d2-admin/issues/201
@@ -69,7 +69,7 @@ export default class d2Page extends VuexModule implements ID2PageState {
       // valid 有效列表 1, 1, 0, 1 => 有效, 有效, 失效, 有效
       const valid = []
       // 处理数据
-      this.opened = value
+      let opened = value
         .map(opened => {
           // 忽略首页
           if (opened.fullPath === '/index') {
@@ -86,7 +86,8 @@ export default class d2Page extends VuexModule implements ID2PageState {
         })
         .filter((opened, index) => valid[index] === 1)
       // 标记已经加载多标签页数据 https://github.com/d2-projects/d2-admin/issues/201
-      this.openedLoaded = true
+      this.SET_OPENED(opened)
+      this.SET_OPENED_LOADED(true)
       // 根据 opened 数据生成缓存设置
       this.keepAliveRefresh()
       // end
@@ -433,6 +434,15 @@ export default class d2Page extends VuexModule implements ID2PageState {
     }
     push(routes)
     this.pool = pool
+  }
+
+  @Mutation
+  SET_OPENED(opened) {
+    this.opened = opened
+  }
+  @Mutation
+  SET_OPENED_LOADED(openedLoaded) {
+    this.openedLoaded = openedLoaded
   }
 }
 
