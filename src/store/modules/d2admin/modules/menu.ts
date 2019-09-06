@@ -117,9 +117,7 @@ export default class d2Menu extends VuexModule implements ID2MenuState {
   }
   @Mutation
   SET_ASIDE_COLLAPSE(value: boolean) {
-    console.log(value)
     this.asideCollapse = value
-    console.log(this.asideCollapse)
   }
 }
 

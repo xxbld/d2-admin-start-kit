@@ -1,4 +1,4 @@
-import screenfull from 'screenfull'
+const screenfull = require('screenfull')
 import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import store from '@/store'
 
@@ -11,13 +11,11 @@ export default class d2Fullscreen extends VuexModule implements ID2FullScreenSta
   active = false
   /**
    * @description 初始化监听
-   * @param {Object} context
    */
   @Action
   listen() {
-
     return new Promise(resolve => {
-      if (screenfull) {
+      if (screenfull.enabled) {
         screenfull.on('change', () => {
           if (!screenfull.isFullscreen) {
             this.SET_ACTIVE(false)
@@ -35,10 +33,10 @@ export default class d2Fullscreen extends VuexModule implements ID2FullScreenSta
   toggle() {
     return new Promise(resolve => {
       if (screenfull.isFullscreen) {
-        screenfull.exit()
+        screenfull.exit().then()
         this.SET_ACTIVE(false)
       } else {
-        screenfull.request()
+        screenfull.request().then()
         this.SET_ACTIVE(true)
       }
       // end

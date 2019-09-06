@@ -1,6 +1,4 @@
-import { mapState, mapMutations } from 'vuex'
 import hotkeys from 'hotkeys-js'
-import { IRootState } from '@/store/index'
 import { d2SearchModule } from '@/store/modules/d2admin/modules/search'
 
 export default {
