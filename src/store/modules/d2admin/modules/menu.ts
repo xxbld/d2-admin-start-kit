@@ -4,7 +4,6 @@ import setting from '@/setting'
 import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import store from '@/store'
 import { d2DbModule } from '@/store/modules/d2admin/modules/db'
-import { type } from 'os'
 
 /**
  * 给菜单数据补充上 path 字段
@@ -27,16 +26,17 @@ export interface ID2MenuState {
   header: any
   aside: any
   asideCollapse: boolean
+  count:number
 }
 
 @Module({ dynamic: true, store, name: 'd2Menu', namespaced: true })
-export default class d2Menu extends VuexModule implements ID2MenuState {
+export default class d2Menu extends VuexModule  {
   header = []
   // 侧栏菜单
   aside = []
+  aside2 = []
   // 侧边栏收缩
   asideCollapse: boolean = false
-
   /**
    * 设置侧边栏展开或者收缩
    * @param {Boolean} collapse is collapse

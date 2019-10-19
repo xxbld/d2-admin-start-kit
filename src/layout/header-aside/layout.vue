@@ -78,17 +78,17 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import d2MenuSide from './components/menu-side'
 import d2MenuHeader from './components/menu-header'
-import d2Tabs from './components/tabs'
-import d2HeaderFullscreen from './components/header-fullscreen'
-import d2HeaderLocales from './components/header-locales'
-import d2HeaderSearch from './components/header-search'
-import d2HeaderSize from './components/header-size'
-import d2HeaderTheme from './components/header-theme'
-import d2HeaderUser from './components/header-user'
-import d2HeaderLog from './components/header-log'
+import d2Tabs from './components/tabs/index.vue'
+import d2HeaderFullscreen from './components/header-fullscreen/index.vue'
+import d2HeaderLocales from './components/header-locales/index.vue'
+import d2HeaderSearch from './components/header-search/index.vue'
+import d2HeaderSize from './components/header-size/index.vue'
+import d2HeaderTheme from './components/header-theme/index.vue'
+import d2HeaderUser from './components/header-user/index.vue'
+import d2HeaderLog from './components/header-log/index.vue'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import mixinSearch from './mixins/search'
 import { d2MenuModule } from '@/store/modules/d2admin/modules/menu'
@@ -96,7 +96,9 @@ import { d2PageModule } from '@/store/modules/d2admin/modules/page'
 import { d2GrayModule } from '@/store/modules/d2admin/modules/gray'
 import { d2TransitionModule } from '@/store/modules/d2admin/modules/transition'
 import { d2ThemeModule } from '@/store/modules/d2admin/modules/theme'
-export default {
+import { Vue, Component } from 'vue-property-decorator'
+
+@Component({
   name: 'd2-layout-header-aside',
   mixins: [mixinSearch],
   components: {
@@ -110,46 +112,51 @@ export default {
     d2HeaderTheme,
     d2HeaderUser,
     d2HeaderLog
-  },
-  data() {
+  }
+})
+export default class layout extends Vue {
+  // [侧边栏宽度] 正常状态
+  asideWidth = '200px'
+  // [侧边栏宽度] 折叠状态
+  asideWidthCollapse = '65px'
+
+  get keepAlive() {
+    return d2PageModule.keepAlive
+  }
+  get grayActive() {
+    return d2GrayModule.active
+  }
+
+  get transitionActive() {
+    return d2TransitionModule.active
+  }
+  get asideCollapse() {
+    return d2MenuModule.asideCollapse
+  }
+  get themeActiveSetting() {
+    return d2ThemeModule.activeSetting
+  }
+
+  /**
+   * @description 最外层容器的背景图片样式
+   */
+  get styleLayoutMainGroup() {
     return {
-      // [侧边栏宽度] 正常状态
-      asideWidth: '200px',
-      // [侧边栏宽度] 折叠状态
-      asideWidthCollapse: '65px'
+      ...(this.themeActiveSetting.backgroundImage
+        ? {
+            backgroundImage: `url('${this.$baseUrl}${this.themeActiveSetting.backgroundImage}')`
+          }
+        : {})
     }
-  },
-  computed: {
-    keepAlive: () => d2PageModule.keepAlive,
-    grayActive: () => d2GrayModule.active,
-    transitionActive: () => d2TransitionModule.active,
-    asideCollapse: () => d2MenuModule.asideCollapse,
+  }
 
-    themeActiveSetting: () => d2ThemeModule.activeSetting,
-
-    /**
-     * @description 最外层容器的背景图片样式
-     */
-    styleLayoutMainGroup() {
-      return {
-        ...(this.themeActiveSetting.backgroundImage
-          ? {
-              backgroundImage: `url('${this.$baseUrl}${this.themeActiveSetting.backgroundImage}')`
-            }
-          : {})
-      }
-    }
-  },
-  methods: {
-    asideCollapseToggle: d2MenuModule.asideCollapseToggle,
-
-    /**
-     * 接收点击切换侧边栏的按钮
-     */
-    handleToggleAside() {
-      debugger
-      this.asideCollapseToggle()
-    }
+  asideCollapseToggle = d2MenuModule.asideCollapseToggle
+  localAside =false;
+  /**
+   * 接收点击切换侧边栏的按钮
+   */
+  async handleToggleAside() {
+    this.asideCollapseToggle()
   }
 }
 </script>

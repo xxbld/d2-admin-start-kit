@@ -9,7 +9,7 @@ export interface ID2TransitionState {
   active: boolean
 }
 
-@Module({ dynamic: true, store, name: 'd2Menu', namespaced: true })
+@Module({ dynamic: true, store, name: 'd2Transition', namespaced: true })
 export default class d2Transition extends VuexModule implements ID2TransitionState {
   active: boolean = setting.transition.active
 

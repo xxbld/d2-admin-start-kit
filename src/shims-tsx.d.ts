@@ -24,6 +24,7 @@ declare module 'vue/types/vue' {
     $open(url: string): void
     $log: log
     $languages: i18nMessage[]
+    $baseUrl:string
   }
 }
 interface log {
