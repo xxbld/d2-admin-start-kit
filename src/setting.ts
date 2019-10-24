@@ -32,6 +32,12 @@ export default {
   theme: {
     list: [
       {
+        title: '标准化',
+        name: 'bzh',
+        backgroundImage: 'image/theme/bzh/bg.png',
+        preview: 'image/theme/bzh/preview@2x.png'
+      },
+      {
         title: 'd2admin 经典',
         name: 'd2',
         preview: 'image/theme/d2/preview@2x.png'
