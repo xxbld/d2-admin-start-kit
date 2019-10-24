@@ -1,7 +1,7 @@
 // Vue
 import Vue from 'vue'
 import i18n from './i18n'
-import App from './App.vue'
+import App from './App'
 // 核心插件
 import d2Admin from '@/plugin/d2admin'
 // store
@@ -11,14 +11,14 @@ import store from '@/store/index'
 import router from './router'
 import menuHeader from '@/menu/header'
 import menuAside from '@/menu/aside'
-import {frameInRoutes } from '@/router/routes'
-import {d2PageModule} from "@/store/modules/d2admin/modules/page";
-import {d2MenuModule} from "@/store/modules/d2admin/modules/menu";
-import {d2SearchModule} from "@/store/modules/d2admin/modules/search";
-import {d2ReleasesModule} from "@/store/modules/d2admin/modules/releases";
-import {d2AccountModule} from "@/store/modules/d2admin/modules/account";
-import {d2UaModule} from "@/store/modules/d2admin/modules/ua";
-import {d2FullscreenModule} from "@/store/modules/d2admin/modules/fullscreen";
+import { frameInRoutes } from '@/router/routes'
+import { d2PageModule } from "@/store/modules/d2admin/modules/page";
+import { d2MenuModule } from "@/store/modules/d2admin/modules/menu";
+import { d2SearchModule } from "@/store/modules/d2admin/modules/search";
+import { d2ReleasesModule } from "@/store/modules/d2admin/modules/releases";
+import { d2AccountModule } from "@/store/modules/d2admin/modules/account";
+import { d2UaModule } from "@/store/modules/d2admin/modules/ua";
+import { d2FullscreenModule } from "@/store/modules/d2admin/modules/fullscreen";
 
 // 核心插件
 Vue.use(d2Admin)

@@ -1,4 +1,7 @@
 export interface ILog {
+  /**
+   * 打印一个 [ title | text ] 样式的信息
+   */
   capsule?: (title: string, info: string, type?: string) => void
   colorful?: (textArr: { text: string; type?: string }[]) => void
   default?: (text: string) => void

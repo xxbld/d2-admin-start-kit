@@ -41,8 +41,17 @@ module.exports = {
     config
       // 开发环境
       .when(process.env.NODE_ENV === 'development',
-        // sourcemap不包含列信息
-        config => config.devtool('cheap-source-map')
+        config => {
+          // sourcemap不包含列信息
+          config.devtool('cheap-source-map')
+          // JSX|TSX 热更新
+          config.module
+            .rule(/\.(j|t)sx$/)
+            .test(/\.(j|t)sx$/)
+            .use("vue-jsx-hot-loader")
+            .before("babel-loader")
+            .loader("vue-jsx-hot-loader")
+        }
       )
       // TRAVIS 构建 vue-loader 添加 filename
       .when(process.env.VUE_APP_BUILD_MODE === 'TRAVIS' || process.env.NODE_ENV === 'development',
