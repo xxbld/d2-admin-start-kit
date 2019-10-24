@@ -11,9 +11,20 @@ import util from '@/libs/util.ts'
 
 // 路由数据
 import routes from './routes'
-import {d2PageModule} from "@/store/modules/d2admin/modules/page";
-import {d2SizeModule} from "@/store/modules/d2admin/modules/size";
-import {d2SearchModule} from "@/store/modules/d2admin/modules/search";
+import { d2PageModule } from "@/store/modules/d2admin/modules/page";
+import { d2SizeModule } from "@/store/modules/d2admin/modules/size";
+import { d2SearchModule } from "@/store/modules/d2admin/modules/search";
+
+
+// fix vue-router NavigationDuplicated
+const VueRouterPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return VueRouterPush.call(this, location).catch(err => err)
+}
+const VueRouterReplace = VueRouter.prototype.replace
+VueRouter.prototype.replace = function replace(location) {
+  return VueRouterReplace.call(this, location).catch(err => err)
+}
 
 Vue.use(VueRouter)
 
