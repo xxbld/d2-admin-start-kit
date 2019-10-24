@@ -77,8 +77,6 @@ export default class d2Account extends VuexModule {
     if (confirm) {
       d2GrayModule.SET_ACTIVE(true)
       MessageBox.confirm('确定要注销当前用户吗', '注销用户', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
         type: 'warning'
       })
           .then(() => {

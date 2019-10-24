@@ -4,21 +4,25 @@ import util from '@/libs/util'
 
 Vue.use(VueI18n)
 
-export interface i18nMessage{
-  label:string
-  value:string
+export interface i18nMessage {
+  label: string
+  value: string
 }
 
-function loadLocaleMessages () {
+function loadLocaleMessages() {
   const locales = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
   const messages = {}
-  locales.keys().forEach(key => {
+  for (const key of locales.keys()) {
     const matched = key.match(/([A-Za-z0-9-_]+)\./i)
     if (matched && matched.length > 1) {
       const locale = matched[1]
-      messages[locale] = locales(key)
+      const localeElementUI = require(`element-ui/lib/locale/lang/${locales(key)._element}`)
+      messages[locale] = {
+        ...locales(key),
+        ...localeElementUI ? localeElementUI.default : {}
+      }
     }
-  })
+  }
   return messages
 }
 

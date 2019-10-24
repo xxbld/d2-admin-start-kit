@@ -1,4 +1,4 @@
-const VueFilenameInjector = require('./tools/vue-filename-injector')
+const VueFilenameInjector = require('@d2-projects/vue-filename-injector')
 
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
@@ -81,6 +81,7 @@ module.exports = {
       .end()
     // 重新设置 alias
     config.resolve.alias
+      .set('@/', resolve('src'))
       .set('@api', resolve('src/api'))
     // 判断环境加入模拟数据
     const entry = config.entry('app')
