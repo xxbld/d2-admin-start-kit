@@ -2,15 +2,16 @@ import { Message, MessageBox } from 'element-ui'
 import util from '@/libs/util'
 import router from '@/router'
 import { AccountLogin } from '@api/sys.login'
-import {Action, getModule, Module, VuexModule} from 'vuex-module-decorators'
+import { Action, getModule, Module, VuexModule } from 'vuex-module-decorators'
 import store from '@/store'
-import {d2UserModule} from "@/store/modules/d2admin/modules/user";
-import {d2GrayModule} from "@/store/modules/d2admin/modules/gray";
-import {d2ThemeModule} from "@/store/modules/d2admin/modules/theme";
-import {d2TransitionModule} from "@/store/modules/d2admin/modules/transition";
-import {d2PageModule} from "@/store/modules/d2admin/modules/page";
-import {d2MenuModule} from "@/store/modules/d2admin/modules/menu";
-import {d2SizeModule} from "@/store/modules/d2admin/modules/size";
+import { d2UserModule } from "@/store/modules/d2admin/modules/user";
+import { d2GrayModule } from "@/store/modules/d2admin/modules/gray";
+import { d2ThemeModule } from "@/store/modules/d2admin/modules/theme";
+import { d2TransitionModule } from "@/store/modules/d2admin/modules/transition";
+import { d2PageModule } from "@/store/modules/d2admin/modules/page";
+import { d2MenuModule } from "@/store/modules/d2admin/modules/menu";
+import { d2SizeModule } from "@/store/modules/d2admin/modules/size";
+import { d2ColorModule } from './color';
 
 
 @Module({ dynamic: true, store, name: 'd2Account', namespaced: true })
@@ -79,18 +80,18 @@ export default class d2Account extends VuexModule {
       MessageBox.confirm('确定要注销当前用户吗', '注销用户', {
         type: 'warning'
       })
-          .then(() => {
-            d2GrayModule.SET_ACTIVE(false)
-            logout().then(r => {})
+        .then(() => {
+          d2GrayModule.SET_ACTIVE(false)
+          logout().then(r => { })
+        })
+        .catch(() => {
+          d2GrayModule.SET_ACTIVE(false)
+          Message({
+            message: '取消注销操作'
           })
-          .catch(() => {
-            d2GrayModule.SET_ACTIVE(false)
-            Message({
-              message: '取消注销操作'
-            })
-          })
+        })
     } else {
-      logout().then(r => {})
+      logout().then(r => { })
     }
   }
   /**
@@ -111,10 +112,12 @@ export default class d2Account extends VuexModule {
       await d2MenuModule.asideCollapseLoad()
       // DB -> store 持久化数据加载全局尺寸
       await d2SizeModule.load()
+      // DB -> store 持久化数据加载颜色设置
+      await d2ColorModule.load()
       // end
       resolve()
     })
   }
 }
 
-export const d2AccountModule=getModule(d2Account)
+export const d2AccountModule = getModule(d2Account)

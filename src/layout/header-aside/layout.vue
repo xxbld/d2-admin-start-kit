@@ -30,6 +30,7 @@
           <d2-header-theme />
           <d2-header-size />
           <d2-header-locales />
+          <d2-header-color/>
           <d2-header-user />
         </div>
       </div>
@@ -89,6 +90,7 @@ import d2HeaderSize from './components/header-size/index.vue'
 import d2HeaderTheme from './components/header-theme/index.vue'
 import d2HeaderUser from './components/header-user/index.vue'
 import d2HeaderLog from './components/header-log/index.vue'
+import d2HeaderColor from './components/header-color/index.vue'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import mixinSearch from './mixins/search'
 import { d2MenuModule } from '@/store/modules/d2admin/modules/menu'
@@ -111,7 +113,8 @@ import { Vue, Component } from 'vue-property-decorator'
     d2HeaderSize,
     d2HeaderTheme,
     d2HeaderUser,
-    d2HeaderLog
+    d2HeaderLog,
+    d2HeaderColor
   }
 })
 export default class layout extends Vue {

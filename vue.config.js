@@ -1,5 +1,8 @@
 const VueFilenameInjector = require('@d2-projects/vue-filename-injector')
 
+const ThemeColorReplacer = require('webpack-theme-color-replacer')
+const forElementUI = require('webpack-theme-color-replacer/forElementUI')
+
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
 
@@ -39,6 +42,16 @@ module.exports = {
     config.resolve
       .symlinks(true)
     config
+      .plugin('theme-color-replacer')
+      .use(ThemeColorReplacer, [{
+        fileName: 'css/theme-colors.[contenthash:8].css',
+        matchColors: [
+          ...forElementUI.getElementUISeries(process.env.VUE_APP_ELEMENT_COLOR) // Element-ui主色系列
+        ],
+        externalCssFiles: ['./node_modules/element-ui/lib/theme-chalk/index.css'], // optional, String or string array. Set external css files (such as cdn css) to extract colors.
+        changeSelector: forElementUI.changeSelector
+      }])
+    config
       // 开发环境
       .when(process.env.NODE_ENV === 'development',
         config => {
@@ -54,11 +67,18 @@ module.exports = {
         }
       )
       // TRAVIS 构建 vue-loader 添加 filename
-      .when(process.env.VUE_APP_BUILD_MODE === 'TRAVIS' || process.env.NODE_ENV === 'development',
+      .when(process.env.VUE_APP_SCOURCE_LINK === 'TRUE',
         VueFilenameInjector(config, {
           propName: process.env.VUE_APP_SOURCE_VIEWER_PROP_NAME
         })
       )
+    // markdown
+    config.module
+      .rule('md')
+      .test(/\.md$/)
+      .use('text-loader')
+      .loader('text-loader')
+      .end()
     // svg
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
@@ -81,11 +101,10 @@ module.exports = {
       .end()
     // 重新设置 alias
     config.resolve.alias
-      .set('@/', resolve('src'))
       .set('@api', resolve('src/api'))
     // 判断环境加入模拟数据
     const entry = config.entry('app')
-    if (process.env.VUE_APP_BUILD_MODE !== 'nomock') {
+    if (process.env.VUE_APP_BUILD_MODE !== 'NOMOCK') {
       entry
         .add('@/mock')
         .end()
