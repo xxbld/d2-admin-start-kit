@@ -12,16 +12,13 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { d2FullscreenModule } from '@/store/modules/d2admin/modules/fullscreen'
 export default {
   computed: {
-    ...mapState('d2admin/fullscreen', [
-      'active'
-    ])
+    active:()=>d2FullscreenModule.active
   },
   methods: {
-    ...mapActions('d2admin/fullscreen', [
-      'toggle'
-    ])
+    toggle:()=>d2FullscreenModule.toggle()
   }
 }
 </script>

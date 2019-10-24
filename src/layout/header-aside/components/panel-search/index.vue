@@ -55,12 +55,13 @@
 import Fuse from 'fuse.js'
 import { mapState } from 'vuex'
 import mixin from '../mixin/menu'
+import { d2SearchModule } from '@/store/modules/d2admin/modules/search'
 export default {
   mixins: [
     mixin
   ],
   components: {
-    'd2-panel-search-item': () => import('./components/panel-search-item/index.vue')
+    'd2-panel-search-item': () => import('./components/panel-search-item/index')
   },
   data () {
     return {
@@ -69,10 +70,10 @@ export default {
     }
   },
   computed: {
-    ...mapState('d2admin/search', [
-      'hotkey',
-      'pool'
-    ]),
+
+    hotkey:()=>d2SearchModule.hotkey,
+    pool:()=>d2SearchModule.pool,
+
     // 这份数据是展示在搜索面板下面的
     resultsList () {
       return (this.results.length === 0 && this.searchText === '') ? this.pool.map(e => ({

@@ -1,42 +1,40 @@
 <template>
-  <div
-    class="d2-contentmenu-list"
-    @click="rowClick">
+  <div class="d2-contentmenu-list" @click="rowClick">
     <div
-      v-for="item in menulist"
+      v-for="item in menuList"
       :key="item.value"
       :data-value="item.value"
       class="d2-contentmenu-item"
-      flex="cross:center main:center">
-      <d2-icon
-        v-if="item.icon"
-        :name="item.icon"/>
-      <div
-        class="d2-contentmenu-item-title"
-        flex-box="1">
-        {{item.title}}
-      </div>
+      flex="cross:center main:center"
+    >
+      <d2-icon v-if="item.icon" :name="item.icon" />
+      <div class="d2-contentmenu-item-title" flex-box="1">{{item.title}}</div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'd2-contextmenu-list',
-  props: {
-    menulist: {
-      type: Array,
-      default: () => []
+<script lang="ts">
+import { Prop, Vue, Component } from 'vue-property-decorator'
+
+export interface IMenuList {
+  icon: string
+  title: string
+  value: string
+}
+
+@Component({
+  name: 'd2-contextmenu-list'
+})
+export default class d2ContextMenu extends Vue {
+  @Prop({ default: () => [], type: Array })
+  menuList: IMenuList[] = []
+
+  rowClick(event) {
+    let target = event.target
+    while (!target.dataset.value) {
+      target = target.parentNode
     }
-  },
-  methods: {
-    rowClick (event) {
-      let target = event.target
-      while (!target.dataset.value) {
-        target = target.parentNode
-      }
-      this.$emit('rowClick', target.dataset.value)
-    }
+    this.$emit('rowClick', target.dataset.value)
   }
 }
 </script>

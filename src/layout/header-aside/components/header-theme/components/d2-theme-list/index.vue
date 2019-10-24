@@ -41,6 +41,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { d2ThemeModule } from '@/store/modules/d2admin/modules/theme'
 export default {
   name: 'd2-theme-list',
   data () {
@@ -52,15 +53,14 @@ export default {
     }
   },
   computed: {
-    ...mapState('d2admin/theme', [
-      'list',
-      'activeName'
-    ])
+
+    list:()=>d2ThemeModule.list,
+    activeName:()=>d2ThemeModule.activeName,
+
   },
   methods: {
-    ...mapActions('d2admin/theme', [
-      'set'
-    ]),
+    set:()=>d2ThemeModule.set(),
+
     handleSelectTheme (name) {
       this.set(name)
     }

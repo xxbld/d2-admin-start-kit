@@ -72,6 +72,7 @@
 <script>
 import { mapState } from 'vuex'
 import { get } from 'lodash'
+import { d2LogModule } from '@/store/modules/d2admin/modules/log'
 export default {
   data () {
     return {
@@ -79,9 +80,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('d2admin/log', [
-      'log'
-    ])
+    log:()=>d2LogModule.log
   },
   methods: {
     get,

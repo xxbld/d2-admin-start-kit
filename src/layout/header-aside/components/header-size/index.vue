@@ -13,6 +13,8 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
+import { d2SizeModule } from '@/store/modules/d2admin/modules/size'
+import { d2PageModule } from '@/store/modules/d2admin/modules/page'
 export default {
   name: 'd2-header-size',
   data () {
@@ -26,17 +28,14 @@ export default {
     }
   },
   computed: {
-    ...mapState('d2admin/size', [
-      'value'
-    ])
+    value:()=>d2SizeModule.value
   },
   methods: {
-    ...mapMutations({
-      pageKeepAliveClean: 'd2admin/page/keepAliveClean'
-    }),
-    ...mapActions({
-      sizeSet: 'd2admin/size/set'
-    }),
+
+    pageKeepAliveClean:d2PageModule.keepAliveClean,
+
+    sizeSet: d2SizeModule.set,
+
     handleChange (value) {
       this.sizeSet(value)
       this.$notify({
