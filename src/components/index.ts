@@ -1,4 +1,4 @@
-import Vue from 'vue'
+    import Vue from 'vue'
 
 import d2Container from './d2-container'
 

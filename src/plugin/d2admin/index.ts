@@ -8,7 +8,7 @@ import 'flex.css'
 // 组件
 import '@/components'
 // svg 图标
-import '@/assets/svg-icons/index.js'
+import '@/assets/svg-icons'
 // 国际化
 import i18n from '@/i18n'
 
