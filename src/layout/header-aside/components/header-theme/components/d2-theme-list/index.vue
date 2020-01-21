@@ -59,7 +59,7 @@ export default {
 
   },
   methods: {
-    set:()=>d2ThemeModule.set(),
+    set:(name)=>d2ThemeModule.set(name),
 
     handleSelectTheme (name) {
       this.set(name)
