@@ -1,7 +1,5 @@
 import Component from 'vue-class-component'
 import { Prop, Vue } from 'vue-property-decorator'
-import { getModule } from 'vuex-module-decorators'
-import store from '../../../store'
 
 @Component({
   name: 'page1'

@@ -1,14 +1,8 @@
-interface ITheme {
-  title: string;
-  name: string;
-  logo: any;
-  logoMini: any;
-  backgroundImage?: any;
-  preview?: any;
-}
+import { ITheme } from './store/modules/d2admin/modules/theme'
+
+const baseUrl = process.env.BASE_URL
 function getThemePng(path: string, match: string, needDefault = false) {
   let png: any = undefined
-  const baseUrl = process.env.BASE_URL
   const subPath = path.replace('./', '').replace('index.scss', `img/${match}`)
   try {
     png = require('./assets/style/theme/' + subPath + '.png')
@@ -16,11 +10,13 @@ function getThemePng(path: string, match: string, needDefault = false) {
   } catch (error) {
     // default bg preview
     if (needDefault) {
-      png = `${baseUrl}image/theme/default/${subPath}.png`
+      png = `${baseUrl}image/theme/default/${match}.png`
     }
   }
   return png
 }
+// TODO: title 可以考虑从国际化配置中读取
+// 有的主题提供多张可选背景??
 const keyName = {
   'bzh': '标准化',
   'd2': 'd2admin 经典',
@@ -38,10 +34,11 @@ function getThemes() {
     if (arr.length === 3) {
       const themeKey = arr[arr.length - 2]
       themes.push({
-        title: keyName[themeKey],
+        title: keyName[themeKey] || themeKey,
         name: themeKey,
         backgroundImage: getThemePng(path, 'bg'),
         preview: getThemePng(path, 'preview@2x', true),
+        // TODO: logo 深色、浅色两套就够了
         logo: getThemePng(path, 'logo-all', true),
         logoMini: getThemePng(path, 'logo-icon-only', true),
       })
@@ -50,7 +47,6 @@ function getThemes() {
   return themes;
 }
 const themes = getThemes()
-console.log(themes)
 
 export default {
   // 快捷键
@@ -84,41 +80,7 @@ export default {
   },
   // 注册的主题
   theme: {
-    list: [
-      {
-        title: '标准化',
-        name: 'bzh',
-        backgroundImage: 'image/theme/bzh/bg.png',
-        preview: 'image/theme/bzh/preview@2x.png'
-      },
-      {
-        title: 'd2admin 经典',
-        name: 'd2',
-        preview: 'image/theme/d2/preview@2x.png'
-      },
-      {
-        title: '紫罗兰',
-        name: 'violet',
-        preview: 'image/theme/violet/preview@2x.png'
-      },
-      {
-        title: '简约线条',
-        name: 'line',
-        backgroundImage: 'image/theme/line/bg.jpg',
-        preview: 'image/theme/line/preview@2x.png'
-      },
-      {
-        title: '流星',
-        name: 'star',
-        backgroundImage: 'image/theme/star/bg.jpg',
-        preview: 'image/theme/star/preview@2x.png'
-      },
-      {
-        title: 'Tomorrow Night Blue (vsCode)',
-        name: 'tomorrow-night-blue',
-        preview: 'image/theme/tomorrow-night-blue/preview@2x.png'
-      }
-    ]
+    list: themes
   },
   // 是否默认开启页面切换动画
   transition: {

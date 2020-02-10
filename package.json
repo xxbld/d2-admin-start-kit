@@ -12,8 +12,6 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@tsxfactory/element-ui": "^1.0.1",
-    "@types/node": "^12.7.2",
     "axios": "^0.18.0",
     "better-scroll": "^1.15.2",
     "core-js": "^2.6.5",
@@ -45,6 +43,7 @@
     "@types/jest": "^24.0.18",
     "@types/js-cookie": "^2.2.2",
     "@types/lowdb": "^1.0.9",
+    "@types/node": "^12.7.2",
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-plugin-typescript": "^3.11.0",

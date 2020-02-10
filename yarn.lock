@@ -753,15 +753,6 @@
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
-"@tsxfactory/element-ui@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.npm.taobao.org/@tsxfactory/element-ui/download/@tsxfactory/element-ui-1.0.1.tgz#3d42a4fb5c747076e677c7544b49319827a9db17"
-  integrity sha1-PUKk+1x0cHbmd8dUS0kxmCep2xc=
-  dependencies:
-    element-ui "^2.12.0"
-    vue "^2.6.10"
-    vue-tsx-support "^2.3.2"
-
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
@@ -3509,7 +3500,7 @@ electron-to-chromium@^1.3.247:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.253.tgz#bc3b2c94c2a109c08d37b04f526dc05fdabcbb5b"
   integrity sha512-LAwFRWViiiCSxQ2Lj3mnyEP8atkpAoHSPUnkFoy4mNabbnPHxtfseWvPCGGhewjHQI+ky/V4LdlTyyI0d3YPXA==
 
-element-ui@^2.11.1, element-ui@^2.12.0:
+element-ui@^2.11.1:
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/element-ui/-/element-ui-2.12.0.tgz#a893bc11ae4f7dbb7e9d541606f23e643f131ee4"
   integrity sha512-DapyT0PW4i/1ETPHk8K8Qbe8B6hj10+dXsRTrOTFryV9wAs6e9mCxbV65awokyR2/v/KuIHJmqX+mH3wUa4rOQ==

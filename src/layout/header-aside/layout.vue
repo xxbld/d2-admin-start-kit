@@ -14,8 +14,8 @@
         flex
       >
         <div class="logo-group" :style="{ width: asideCollapse ? asideWidthCollapse : asideWidth }" flex-box="0">
-          <img v-if="asideCollapse" :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/icon-only.png`" />
-          <img v-else :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/all.png`" />
+          <img v-if="asideCollapse" :src="themeActiveSetting.logoMini" />
+          <img v-else :src="themeActiveSetting.logo" />
         </div>
         <div class="toggle-aside-btn" @click="handleToggleAside" flex-box="0">
           <d2-icon name="bars" />
@@ -147,7 +147,7 @@ export default class layout extends Vue {
     return {
       ...(this.themeActiveSetting.backgroundImage
         ? {
-            backgroundImage: `url('${this.$baseUrl}${this.themeActiveSetting.backgroundImage}')`
+            backgroundImage: `url('${this.themeActiveSetting.backgroundImage}')`
           }
         : {})
     }

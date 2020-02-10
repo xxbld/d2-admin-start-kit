@@ -4,8 +4,17 @@ import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-dec
 import store from '@/store'
 import { d2DbModule } from '@/store/modules/d2admin/modules/db'
 
+export interface ITheme {
+  title: string;
+  name: string;
+  logo: any;
+  logoMini: any;
+  backgroundImage?: any;
+  preview?: any;
+}
 export interface ID2ThemeState {
-  list: { title: string; name: string; backgroundImage?: string; preview: string }[]
+  // list: { title: string; name: string; backgroundImage?: string; preview: string }[]
+  list: ITheme[]
   activeName: string
 }
 
