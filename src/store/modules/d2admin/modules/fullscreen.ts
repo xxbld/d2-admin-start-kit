@@ -7,7 +7,7 @@ export interface ID2FullScreenState {
 }
 
 @Module({ dynamic: true, store, name: 'd2Fullscreen', namespaced: true })
-export default class d2Fullscreen extends VuexModule implements ID2FullScreenState {
+export default class D2Fullscreen extends VuexModule implements ID2FullScreenState {
   active = false
   /**
    * @description 初始化监听
@@ -54,4 +54,4 @@ export default class d2Fullscreen extends VuexModule implements ID2FullScreenSta
   }
 }
 
-export const d2FullscreenModule = getModule(d2Fullscreen)
+export const d2FullscreenModule = getModule(D2Fullscreen)

@@ -9,7 +9,7 @@ export interface ID2LogState {
   log: any
 }
 @Module({ dynamic: true, store, name: 'd2Log', namespaced: true })
-export default class d2Log extends VuexModule {
+export default class D2Log extends VuexModule {
   log = []
 
   /**
@@ -70,4 +70,4 @@ export default class d2Log extends VuexModule {
   }
 }
 
-export const d2LogModule = getModule(d2Log)
+export const d2LogModule = getModule(D2Log)

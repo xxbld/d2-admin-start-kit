@@ -4,7 +4,7 @@ import util from '@/libs/util'
 
 Vue.use(VueI18n)
 
-export interface i18nMessage {
+export interface I18nMessage {
   label: string
   value: string
 }

@@ -19,7 +19,7 @@ export interface ID2ThemeState {
 }
 
 @Module({ dynamic: true, store, name: 'd2Theme', namespaced: true })
-export default class d2Theme extends VuexModule implements ID2ThemeState {
+export default class D2Theme extends VuexModule implements ID2ThemeState {
   list = setting.theme.list
   // 现在激活的主题 这应该是一个名字 不是对象
   activeName = setting.theme.list[0].name
@@ -36,7 +36,7 @@ export default class d2Theme extends VuexModule implements ID2ThemeState {
   set(themeName) {
     return new Promise(async resolve => {
       // 检查这个主题在主题列表里是否存在
-      let activeName = this.list.find(e => e.name === themeName) ? themeName : this.list[0].name
+      const activeName = this.list.find(e => e.name === themeName) ? themeName : this.list[0].name
       this.SET_ACTIVE_NAME(activeName)
       // 将 vuex 中的主题应用到 dom
       this.SET_DOM()
@@ -58,7 +58,7 @@ export default class d2Theme extends VuexModule implements ID2ThemeState {
   load() {
     return new Promise(async resolve => {
       // store 赋值
-      let activeName = (await d2DbModule.get({
+      const activeName = (await d2DbModule.get({
         dbName: 'sys',
         path: 'theme.activeName',
         defaultValue: this.list[0].name,
@@ -97,4 +97,4 @@ export default class d2Theme extends VuexModule implements ID2ThemeState {
   }
 }
 
-export const d2ThemeModule = getModule(d2Theme)
+export const d2ThemeModule = getModule(D2Theme)

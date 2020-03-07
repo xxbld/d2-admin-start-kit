@@ -1,16 +1,7 @@
-import { Route, NavigationGuard } from 'vue-router';
-import { Vue, Component } from 'vue-property-decorator'
-
-
-@Component({
-  name: 'redirect'
+import { Vue } from 'vue-property-decorator'
+export default Vue.extend({
+  beforeRouteEnter(to, from, next) {
+    next(instance => instance.$router.replace(JSON.parse(from.params.route)))
+  },
+  render: h => h()
 })
-export default class redirect extends Vue {
-  beforeRouteEnter(to, from, next): void {
-    next((instance: Vue) => instance.$router.replace(JSON.parse(from.params.route)))
-  }
-  created(){
-
-  }
-  render = (h: () => void) => h()
-}

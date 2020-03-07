@@ -6,7 +6,7 @@ export interface ID2UaState {
   data: any
 }
 @Module({ dynamic: true, store, name: 'd2Ua', namespaced: true })
-export default class d2Ua extends VuexModule implements ID2UaState {
+export default class D2Ua extends VuexModule implements ID2UaState {
   data: any
   @Mutation
   GET_UA() {
@@ -14,4 +14,4 @@ export default class d2Ua extends VuexModule implements ID2UaState {
   }
 }
 
-export const d2UaModule = getModule(d2Ua)
+export const d2UaModule = getModule(D2Ua)

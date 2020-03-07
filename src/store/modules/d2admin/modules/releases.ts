@@ -7,7 +7,7 @@ export interface IReleaseState {
 }
 
 @Module({ dynamic: true, store, name: 'd2Releases', namespaced: true })
-export default class d2Releases extends VuexModule implements IReleaseState {
+export default class D2Releases extends VuexModule implements IReleaseState {
   version = 'abc'
 
   /**
@@ -23,4 +23,4 @@ export default class d2Releases extends VuexModule implements IReleaseState {
   }
 }
 
-export const d2ReleasesModule = getModule(d2Releases)
+export const d2ReleasesModule = getModule(D2Releases)

@@ -4,7 +4,7 @@ import db from './util.db'
 import log from './util.log'
 import { ILog } from './util.log';
 
-export interface util{
+export interface Util{
   cookies:ICookies
   db:any
   log:ILog
@@ -12,7 +12,7 @@ export interface util{
   open?:(url:string)=>void
 }
 
-const util:util = {
+const util:Util = {
   cookies,
   db,
   log
@@ -32,7 +32,7 @@ util.title = function (titleText:string) {
  * @param {String} url 地址
  */
 util.open = function (url:string) {
-  var a = document.createElement('a')
+  const a = document.createElement('a')
   a.setAttribute('href', url)
   a.setAttribute('target', '_blank')
   a.setAttribute('id', 'd2admin-link-temp')

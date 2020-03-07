@@ -1,6 +1,6 @@
 // 自定义全局类型 或者 拓展类型
 
-import { i18nMessage } from "@/i18n";
+import { I18nMessage } from "@/i18n";
 import { ILog } from "@/libs/util.log";
 
 declare global {
@@ -17,7 +17,7 @@ declare module 'vue/types/vue' {
          */
         $open(url: string): void;
         $log: ILog;
-        $languages: i18nMessage[];
+        $languages: I18nMessage[];
 
         $env: string;
         $baseUrl: string;

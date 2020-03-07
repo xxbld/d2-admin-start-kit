@@ -13,7 +13,6 @@ import { d2UserModule } from '@/store/modules/d2admin/modules/user'
 @Component({
   name:'page2'
 })
-export default class page2 extends Vue{
-
+export default class Page2 extends Vue{
 }
 </script>

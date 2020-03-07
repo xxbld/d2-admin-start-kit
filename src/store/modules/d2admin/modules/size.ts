@@ -11,7 +11,7 @@ export interface ID2SizeState {
 }
 
 @Module({ dynamic: true, store, name: 'd2Size', namespaced: true })
-export default class d2Size extends VuexModule implements ID2SizeState {
+export default class D2Size extends VuexModule implements ID2SizeState {
   value = ''
 
   /**
@@ -69,7 +69,7 @@ export default class d2Size extends VuexModule implements ID2SizeState {
   load() {
     return new Promise(async resolve => {
       // store 赋值
-      let value = (await d2DbModule.get({
+      const value = (await d2DbModule.get({
         dbName: 'sys',
         path: 'size.value',
         defaultValue: 'default',
@@ -87,4 +87,4 @@ export default class d2Size extends VuexModule implements ID2SizeState {
     this.value = value
   }
 }
-export const d2SizeModule = getModule(d2Size)
+export const d2SizeModule = getModule(D2Size)

@@ -117,7 +117,7 @@ import { Vue, Component } from 'vue-property-decorator'
     d2HeaderColor
   }
 })
-export default class layout extends Vue {
+export default class Layout extends Vue {
   // [侧边栏宽度] 正常状态
   asideWidth = '200px'
   // [侧边栏宽度] 折叠状态

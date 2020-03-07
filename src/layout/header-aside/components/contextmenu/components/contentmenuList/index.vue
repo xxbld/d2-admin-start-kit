@@ -25,7 +25,7 @@ export interface IMenuList {
 @Component({
   name: 'd2-contextmenu-list'
 })
-export default class d2ContextMenu extends Vue {
+export default class D2ContextMenu extends Vue {
   @Prop({ default: () => [], type: Array })
   menuList: IMenuList[] = []
 

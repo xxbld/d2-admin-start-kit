@@ -10,7 +10,7 @@ export interface ID2TransitionState {
 }
 
 @Module({ dynamic: true, store, name: 'd2Transition', namespaced: true })
-export default class d2Transition extends VuexModule implements ID2TransitionState {
+export default class D2Transition extends VuexModule implements ID2TransitionState {
   active: boolean = setting.transition.active
 
   /**
@@ -41,7 +41,7 @@ export default class d2Transition extends VuexModule implements ID2TransitionSta
   load() {
     return new Promise(async resolve => {
       // store 赋值
-      let active = (await d2DbModule.get({
+      const active = (await d2DbModule.get({
         dbName: 'sys',
         path: 'transition.active',
         defaultValue: setting.transition.active,
@@ -59,4 +59,4 @@ export default class d2Transition extends VuexModule implements ID2TransitionSta
   }
 }
 
-export const d2TransitionModule = getModule(d2Transition)
+export const d2TransitionModule = getModule(D2Transition)
