@@ -20,7 +20,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 @Component({})
-export default class d2Badge extends Vue {}
+export default class D2Badge extends Vue {}
 </script>
 
 <style lang="scss" scoped>

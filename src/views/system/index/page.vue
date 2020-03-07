@@ -41,7 +41,7 @@ import D2PageCover from './components/d2-page-cover'
     D2PageCover
   },
 })
-export default class page extends Vue {
+export default class Page extends Vue {
     filename:string = __filename
 }
 </script>

@@ -10,7 +10,7 @@ export default class redirect extends Vue {
     next((instance: Vue) => instance.$router.replace(JSON.parse(from.params.route)))
   }
   created(){
-    
+
   }
   render = (h: () => void) => h()
 }

@@ -133,6 +133,25 @@ export default class d2Page extends VuexModule implements ID2PageState {
   }
   /**
    * @class opened
+   * @description 重排页面列表上的某一项
+   * @param {Object} context
+   * @param {Object} payload { oldIndex, newIndex } 位置信息
+   */
+  @Action
+  openedSort ({ oldIndex, newIndex }) {
+    return new Promise(async resolve => {
+      // 重排页面列表某一项
+      let page = this.opened[oldIndex]
+      this.opened.splice(oldIndex, 1)
+      this.opened.splice(newIndex, 0, page)
+      // 持久化
+      await this.openD2db().then()
+      // end
+      resolve()
+    })
+  }
+  /**
+   * @class opened
    * @description 新增一个 tag (打开一个页面)
    * @param {Object} payload new tag info
    */

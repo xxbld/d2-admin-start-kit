@@ -6,7 +6,7 @@
           <d2-contextmenu-list :menulist="tagName === '/index' ? contextmenuListIndex : contextmenuList" @rowClick="contextmenuClick" />
         </d2-contextmenu>
         <el-tabs
-          class="d2-multiple-page-control"
+          class="d2-multiple-page-control d2-multiple-page-sort"
           :value="current"
           type="card"
           :closable="true"
@@ -46,6 +46,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import Sortable from 'sortablejs'
 export default {
   components: {
     D2Contextmenu: () => import('../contextmenu/index'),
@@ -70,7 +71,7 @@ export default {
     ...mapState('d2Page', ['opened', 'current'])
   },
   methods: {
-    ...mapActions('d2Page', ['close', 'closeLeft', 'closeRight', 'closeOther', 'closeAll']),
+    ...mapActions('d2Page', ['close', 'closeLeft', 'closeRight', 'closeOther', 'closeAll', 'openedSort']),
     /**
      * @description 右键菜单功能点击
      */
@@ -147,6 +148,16 @@ export default {
         })
       }
     }
+  },
+  mounted () {
+    debugger;
+    const el = document.querySelectorAll('.d2-multiple-page-sort .el-tabs__nav')[0]
+    Sortable.create(el, {
+      onEnd: (evt) => {
+        const { oldIndex, newIndex } = evt
+        this.openedSort({ oldIndex, newIndex })
+      }
+    })
   }
 }
 </script>
