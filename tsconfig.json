@@ -14,13 +14,34 @@
     "noImplicitAny": false,
     "strictNullChecks": false,
     "baseUrl": ".",
-    "types": [ "node", "webpack-env"],
+    "types": [
+      "node",
+      "webpack-env",
+      "jest"
+    ],
     "paths": {
-      "@/*": ["src/*"],
-      "@api/*": ["src/api/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "@api/*": [
+        "src/api/*"
+      ]
     },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

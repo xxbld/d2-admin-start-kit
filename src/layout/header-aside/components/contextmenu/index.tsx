@@ -4,7 +4,7 @@ import css from './index.scss'
 @Component({
   name: 'd2-contextmenu'
 })
-export default class d2ContextMenu extends Vue {
+export default class D2ContextMenu extends Vue {
   @Prop({ default: false, type: Boolean }) visible: boolean
   @Prop({ default: 0, type: Number }) x: number
   @Prop({ default: false, type: Number }) y: number

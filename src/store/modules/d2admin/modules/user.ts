@@ -6,7 +6,7 @@ export interface ID2UserState {
   info: any
 }
 @Module({ dynamic: true, store, name: 'd2User', namespaced: true })
-export default class d2User extends VuexModule implements ID2UserState {
+export default class D2User extends VuexModule implements ID2UserState {
   info: any = {}
 
   /**
@@ -36,7 +36,7 @@ export default class d2User extends VuexModule implements ID2UserState {
   load() {
     return new Promise(async resolve => {
       // store 赋值
-      let info = await d2DbModule.get({
+      const info = await d2DbModule.get({
         dbName: 'sys',
         path: 'user.info',
         defaultValue: {},
@@ -54,4 +54,4 @@ export default class d2User extends VuexModule implements ID2UserState {
 
 }
 
-export const d2UserModule = getModule(d2User)
+export const d2UserModule = getModule(D2User)

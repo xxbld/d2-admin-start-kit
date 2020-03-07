@@ -28,8 +28,8 @@ export interface ID2PageState {
 }
 
 @Module({ dynamic: true, store, name: 'd2Page', namespaced: true })
-export default class d2Page extends VuexModule implements ID2PageState {
-  current: string = ''
+export default class D2Page extends VuexModule implements ID2PageState {
+  current = ''
   keepAlive: any = []
   opened: IOpened[] = setting.page.opened
   openedLoaded = false
@@ -69,7 +69,7 @@ export default class d2Page extends VuexModule implements ID2PageState {
       // valid 有效列表 1, 1, 0, 1 => 有效, 有效, 失效, 有效
       const valid = []
       // 处理数据
-      let opened = value
+      const opened = value
         .map(opened => {
           // 忽略首页
           if (opened.fullPath === '/index') {
@@ -120,11 +120,30 @@ export default class d2Page extends VuexModule implements ID2PageState {
   openedUpdate({ index, params, query, fullPath }) {
     return new Promise(async resolve => {
       // 更新页面列表某一项
-      let page = this.opened[index]
+      const page = this.opened[index]
       page.params = params || page.name
       page.query = query || page.query
       page.fullPath = fullPath || page.fullPath
       this.opened.splice(index, 1, page)
+      // 持久化
+      await this.openD2db().then()
+      // end
+      resolve()
+    })
+  }
+  /**
+   * @class opened
+   * @description 重排页面列表上的某一项
+   * @param {Object} context
+   * @param {Object} payload { oldIndex, newIndex } 位置信息
+   */
+  @Action
+  openedSort ({ oldIndex, newIndex }) {
+    return new Promise(async resolve => {
+      // 重排页面列表某一项
+      const page = this.opened[oldIndex]
+      this.opened.splice(oldIndex, 1)
+      this.opened.splice(newIndex, 0, page)
       // 持久化
       await this.openD2db().then()
       // end
@@ -140,7 +159,7 @@ export default class d2Page extends VuexModule implements ID2PageState {
   add({ tag, params, query, fullPath }) {
     return new Promise(async resolve => {
       // 设置新的 tag 在新打开一个以前没打开过的页面时使用
-      let newTag = tag
+      const newTag = tag
       newTag.params = params || newTag.params
       newTag.query = query || newTag.query
       newTag.fullPath = fullPath || newTag.fullPath
@@ -165,7 +184,7 @@ export default class d2Page extends VuexModule implements ID2PageState {
   open({ name, params, query, fullPath }) {
     return new Promise(async resolve => {
       // 已经打开的页面
-      let opened = this.opened
+      const opened = this.opened
       // 判断此页面是否已经打开 并且记录位置
       let pageOpendIndex = 0
       const pageOpend = opened.find((page, index) => {
@@ -183,7 +202,7 @@ export default class d2Page extends VuexModule implements ID2PageState {
         })
       } else {
         // 页面以前没有打开过
-        let page = this.pool.find(t => t.name === name)
+        const page = this.pool.find(t => t.name === name)
         // 如果这里没有找到 page 代表这个路由虽然在框架内 但是不参与标签页显示
         if (page) {
           await this.add({
@@ -213,7 +232,7 @@ export default class d2Page extends VuexModule implements ID2PageState {
       // 如果关闭的页面就是当前显示的页面
       if (isCurrent) {
         // 去找一个新的页面
-        let len = this.opened.length
+        const len = this.opened.length
         for (let i = 1; i < len; i++) {
           if (this.opened[i].fullPath === tagName) {
             if (i < len - 1) {
@@ -238,7 +257,7 @@ export default class d2Page extends VuexModule implements ID2PageState {
       // 最后需要判断是否需要跳到首页
       if (isCurrent) {
         const { name = '', params = {}, query = {} } = newPage
-        let routerObj = {
+        const routerObj = {
           name,
           params,
           query
@@ -446,4 +465,4 @@ export default class d2Page extends VuexModule implements ID2PageState {
   }
 }
 
-export const d2PageModule = getModule(d2Page)
+export const d2PageModule = getModule(D2Page)

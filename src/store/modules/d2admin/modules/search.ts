@@ -13,7 +13,7 @@ export interface ID2SearchState {
 }
 
 @Module({ dynamic: true, store, name: 'd2Search', namespaced: true })
-export default class d2Search extends VuexModule implements ID2SearchState {
+export default class D2Search extends VuexModule implements ID2SearchState {
   active = false
   // 快捷键
   hotkey = {
@@ -62,4 +62,4 @@ export default class d2Search extends VuexModule implements ID2SearchState {
   }
 }
 
-export const d2SearchModule = getModule(d2Search)
+export const d2SearchModule = getModule(D2Search)

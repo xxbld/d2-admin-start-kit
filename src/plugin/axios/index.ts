@@ -2,17 +2,11 @@ import store from '@/store'
 import axios from 'axios'
 import { Message } from 'element-ui'
 import util from '@/libs/util'
-import {d2LogModule} from "@/store/modules/d2admin/modules/log";
+import { d2LogModule } from "@/store/modules/d2admin/modules/log";
 
-// 创建一个错误
-function errorCreate (msg:string) {
-  const error = new Error(msg)
-  errorLog(error)
-  throw error
-}
 
 // 记录和显示错误
-function errorLog (error:Error) {
+function errorLog(error: Error) {
   // 添加到日志
   d2LogModule.push({
     message: '数据请求异常',
@@ -33,6 +27,12 @@ function errorLog (error:Error) {
     type: 'error',
     duration: 5 * 1000
   })
+}
+// 创建一个错误
+function errorCreate(msg: string) {
+  const error = new Error(msg)
+  errorLog(error)
+  throw error
 }
 
 // 创建一个 axios 实例

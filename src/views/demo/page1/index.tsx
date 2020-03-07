@@ -4,7 +4,7 @@ import { Prop, Vue } from 'vue-property-decorator'
 @Component({
   name: 'page1'
 })
-export default class page1 extends Vue {
+export default class Page1 extends Vue {
   @Prop()
   private msg!: string
   async mounted() {}

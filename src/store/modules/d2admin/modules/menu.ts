@@ -30,13 +30,13 @@ export interface ID2MenuState {
 }
 
 @Module({ dynamic: true, store, name: 'd2Menu', namespaced: true })
-export default class d2Menu extends VuexModule  {
+export default class D2Menu extends VuexModule  {
   header = []
   // 侧栏菜单
   aside = []
   aside2 = []
   // 侧边栏收缩
-  asideCollapse: boolean = false
+  asideCollapse = false
   /**
    * 设置侧边栏展开或者收缩
    * @param {Boolean} collapse is collapse
@@ -84,13 +84,13 @@ export default class d2Menu extends VuexModule  {
   asideCollapseLoad() {
     return new Promise(async resolve => {
       // store 赋值
-      let asideCollapse = await d2DbModule.get({
+      const asideCollapse = await d2DbModule.get({
         dbName: 'sys',
         path: 'menu.asideCollapse',
         defaultValue: setting.menu.asideCollapse,
         user: true
       })
-      let doubleCheck = asideCollapse === 'true'
+      const doubleCheck = asideCollapse === 'true'
       this.SET_ASIDE_COLLAPSE(doubleCheck)
       // end
       resolve()
@@ -121,4 +121,4 @@ export default class d2Menu extends VuexModule  {
   }
 }
 
-export const d2MenuModule = getModule(d2Menu)
+export const d2MenuModule = getModule(D2Menu)

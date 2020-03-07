@@ -8,7 +8,7 @@ export interface ID2ColorState {
     value: string
 }
 @Module({ dynamic: true, store, name: 'd2Color', namespaced: true })
-export default class d2Color extends VuexModule implements ID2ColorState {
+export default class D2Color extends VuexModule implements ID2ColorState {
     // 颜色
     value = process.env.VUE_APP_ELEMENT_COLOR
     /**
@@ -73,7 +73,7 @@ export default class d2Color extends VuexModule implements ID2ColorState {
     @Mutation
     APPLY({ oldColor, newColor }) {
         this.value = newColor
-        var options = {
+        const options = {
             oldColors: [...forElementUI.getElementUISeries(oldColor)],
             newColors: [...forElementUI.getElementUISeries(newColor)]
         }
@@ -81,4 +81,4 @@ export default class d2Color extends VuexModule implements ID2ColorState {
     }
 }
 
-export const d2ColorModule = getModule(d2Color)
+export const d2ColorModule = getModule(D2Color)

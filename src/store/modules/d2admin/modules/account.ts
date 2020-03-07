@@ -15,7 +15,7 @@ import { d2ColorModule } from './color';
 
 
 @Module({ dynamic: true, store, name: 'd2Account', namespaced: true })
-export default class d2Account extends VuexModule {
+export default class D2Account extends VuexModule {
   /**
    * @description 登录
    * @param {Object} payload username {String} 用户账号
@@ -120,4 +120,4 @@ export default class d2Account extends VuexModule {
   }
 }
 
-export const d2AccountModule = getModule(d2Account)
+export const d2AccountModule = getModule(D2Account)

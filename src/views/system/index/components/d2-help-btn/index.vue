@@ -39,8 +39,8 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 @Component({})
-export default class d2HelpBtn extends Vue {
-  dialogVisible: boolean = false
+export default class D2HelpBtn extends Vue {
+  dialogVisible = false
   handleClickVisible() {
     this.dialogVisible = true
   }

@@ -5,8 +5,8 @@ export interface ID2Gray {
   active:boolean
 }
 @Module({ dynamic: true, store, name: "d2Gray", namespaced: true })
-export default class d2Gray extends VuexModule implements ID2Gray{
-  active: boolean = false;
+export default class D2Gray extends VuexModule implements ID2Gray{
+  active = false;
 
   /**
    * @description 切换灰度状态
@@ -26,6 +26,6 @@ export default class d2Gray extends VuexModule implements ID2Gray{
   }
 }
 
-export const d2GrayModule = getModule(d2Gray)
+export const d2GrayModule = getModule(D2Gray)
 
 

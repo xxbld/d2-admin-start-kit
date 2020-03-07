@@ -5,7 +5,7 @@ import { Action, getModule, Module, VuexModule } from 'vuex-module-decorators'
 import store from '@/store'
 
 @Module({ dynamic: true, store, name: 'd2Db', namespaced: true })
-export default class d2Db extends VuexModule {
+export default class D2Db extends VuexModule {
   /**
    * @description 将数据存储到指定位置 | 路径不存在会自动初始化
    * @description 效果类似于取值 dbName.path = value
@@ -129,7 +129,7 @@ export default class d2Db extends VuexModule {
   }
 }
 
-export const d2DbModule = getModule(d2Db)
+export const d2DbModule = getModule(D2Db)
 
 export const db = {
   namespaced: true,

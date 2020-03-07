@@ -15,7 +15,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 @Component({})
-export default class d2PageCover extends Vue {}
+export default class D2PageCover extends Vue {}
 </script>
 <style lang="scss" scoped>
 .d2-page-cover {
